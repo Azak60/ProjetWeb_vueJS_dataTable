@@ -1,6 +1,7 @@
 <template>
-    <div id="app">
-        <Table :interventions=this.interventions></Table>
+    <div id="app" class="container">
+        <img src="./assets/logo.png">
+        <Table :interventions=this.interventions :msg="'Welcome to the DataTable'"></Table>
 
         <!--<HelloWorld msg="Welcome to Your Vue.js App"/>-->
     </div>
@@ -9,7 +10,6 @@
 <script>
     // import HelloWorld from './components/HelloWorld.vue';
     import Table from './components/MyComponent/Table';
-
 
     export default {
         name: 'app',
@@ -20,7 +20,7 @@
             return {
                 id: '',
                 title: '',
-                resume: '',
+                msgIntervention: '',
                 affectedTo: '',
                 client: '',
                 state: '',
@@ -28,7 +28,7 @@
                     {
                         id: '1',
                         title: 'Correction de bug',
-                        resume: 'Correction d\'un bug impactant les serveurs back-end.',
+                        msgIntervention: 'Correction d\'un bug impactant les serveurs back-end.',
                         affectedTo: 'Nicolas',
                         client: 'CGI',
                         state: false
@@ -36,7 +36,7 @@
                     {
                         id: '2',
                         title: 'Réparation de PC',
-                        resume: 'Répération de la carte graphique défaillante',
+                        msgIntervention: 'Répération de la carte graphique défaillante',
                         affectedTo: 'Cyril',
                         client: 'CGI',
                         state: false
