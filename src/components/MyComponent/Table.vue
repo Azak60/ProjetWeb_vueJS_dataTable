@@ -1,25 +1,18 @@
 <template>
-    <table>
+    <table class="col-12">
         <thead class="row">
-            <tr>
-                <th class="col">Id</th>
-                <th class="col">Title</th>
-                <th class="col">Résumé</th>
-                <th class="col">Affected To</th>
-                <th class="col">Client</th>
-                <th class="col">State</th>
+            <tr class="col-12">
+                    <th class="col-6">Id</th>
+                    <th class="col-6">Title</th>
+                    <th class="col-6">Résumé</th>
+                    <th class="col-6">Affected To</th>
+                    <th class="col-6">Client</th>
+                    <th class="col-6">State</th>
             </tr>
         </thead>
 
-        <tbody>
-            <tr class="row" v-for="intervention in dataInterventions" :key="dataInterventions.id">
-                <td scope="col"># {{intervention.id}}</td>
-                <td class="col">{{intervention.title}}</td>
-                <td class="col">{{intervention.resume}}</td>
-                <td class="col">{{intervention.affectedTo}}</td>
-                <td class="col">{{intervention.client}}</td>
-                <td class="col">{{intervention.state}}</td>
-            </tr>
+        <tbody class="row">
+            <LineOfTable v-for="intervention in dataInterventions" :intervention="intervention" :key="dataInterventions.id"></LineOfTable>
         </tbody>
         <tfoot class="row">
 
@@ -29,22 +22,16 @@
 
 <script>
     import axios from 'axios';
-    import lineOfTable from './../../components/MyComponent/lineOfTable';
-    import deleteTable from './../../components/MyComponent/deleteTable';
+    import LineOfTable from './LineOfTable';
 
     export default {
         name: "Table",
         props: {
-            msg: String,
-            // interventions: Object(Array)
+            msg: String
         },
         components: {
-            lineOfTable,
-            deleteTable
+            LineOfTable
         },
-        /*data() {
-            return {}
-        },*/
         data() {
             return {
                 id: '',
@@ -53,8 +40,6 @@
                 affectedTo: '',
                 client: '',
                 state: '',
-
-                // oneIntervention: lineOfTable,
                 dataInterventions: []
             }
         },
@@ -77,7 +62,7 @@
                     affectedTo: this.affectedTo,
                     client: this.client,
                     state: this.state
-                }
+                };
 
                 this.dataInterventions.push(oneIntervention)
             }

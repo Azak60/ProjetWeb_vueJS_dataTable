@@ -1,17 +1,20 @@
 <template>
     <div id="app" class="container">
         <img src="./assets/logo.png">
+        <AddData></AddData>
         <Table :msg="'Welcome to the DataTable'"></Table>
     </div>
 </template>
 
 <script>
     import Table from './components/MyComponent/Table';
+    import AddData from './components/MyComponent/AddData';
 
     export default {
         name: 'app',
         components: {
-            Table
+            Table,
+            AddData
         }
     }
 </script>
