@@ -1,15 +1,14 @@
 <template>
-    <b-row :name="mainTable" id="mainTable">
         <table>
             <thead>
-            <tr>
-                <b-col-sm><th>Id</th></b-col-sm>
-                <b-col-sm><th>Title</th></b-col-sm>
-                <b-col-sm><th>Resume</th></b-col-sm>
-                <b-col-sm><th>Affected To</th></b-col-sm>
-                <b-col-sm>Client</b-col-sm>
-                <b-col-sm>State</b-col-sm>
-            </tr>
+                <tr>
+                    <th>Id</th>
+                    <th>Title</th>
+                    <th>Resume</th>
+                    <th>Affected To</th>
+                    <th>Client</th>
+                    <th>State</th>
+                </tr>
             </thead>
 
             <tbody>
@@ -23,18 +22,40 @@
             </tbody>
             <tfoot></tfoot>
         </table>
-    </b-row>
+
 </template>
 
 <script>
+    import axios from 'axios';
+
     export default {
         name: "Table",
         props: {
             msg: String,
-            interventions: Array()
-        },
+            interventions: Object(Array)
+
+            },
         data() {
-            return {}
+            return {
+                dataInterventions: []
+            }
+        },
+        methods: {
+            fetchData() {
+                axios.get('https://raw.githubusercontent.com/mdubourg001/datatable_vuejs/master/src/assets/MOCK_DATA.json')
+                    .then((response) => {
+                        console.log(this);
+                        this.dataInterventions = response
+                        // console.log(this);
+                        // console.log(response)
+                    })
+            .catch(function (error) {
+                    console.log(error)
+                })
+            }
+        },
+        mounted() {
+            this.fetchData()
         }
     }
 </script>

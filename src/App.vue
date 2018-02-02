@@ -1,7 +1,6 @@
 <template>
     <div id="app">
-        <b-row><img src="./assets/logo.png"></b-row>
-        <Table :interventions=this.interventions :msg="'Welcome to the DataTable'"></Table>
+        <Table :interventions=this.interventions></Table>
 
         <!--<HelloWorld msg="Welcome to Your Vue.js App"/>-->
     </div>
@@ -10,6 +9,7 @@
 <script>
     // import HelloWorld from './components/HelloWorld.vue';
     import Table from './components/MyComponent/Table';
+
 
     export default {
         name: 'app',
@@ -48,8 +48,6 @@
 </script>
 
 <style>
-    @import '../node_modules/bootstrap/dist/css/bootstrap.css';
-
     #app {
         font-family: 'Avenir', Helvetica, Arial, sans-serif;
         -webkit-font-smoothing: antialiased;
