@@ -2,23 +2,23 @@
     <table>
         <thead class="row">
             <tr>
-                <th class="col-2">Id</th>
-                <th class="col-2">Title</th>
-                <th class="col-2">Résumé</th>
-                <th class="col-2">Affected To</th>
-                <th class="col-2">Client</th>
-                <th class="col-2">State</th>
+                <th class="col">Id</th>
+                <th class="col">Title</th>
+                <th class="col">Résumé</th>
+                <th class="col">Affected To</th>
+                <th class="col">Client</th>
+                <th class="col">State</th>
             </tr>
         </thead>
 
-        <tbody class="row">
+        <tbody>
             <tr class="row" v-for="intervention in dataInterventions" :key="dataInterventions.id">
-                <td class="col-2"># {{intervention.id}}</td>
-                <td class="col-2">{{intervention.title}}</td>
-                <td class="col-2">{{intervention.msgIntervention}}</td>
-                <td class="col-2">{{intervention.affectedTo}}</td>
-                <td class="col-2">{{intervention.client}}</td>
-                <td class="col-2">{{intervention.state}}</td>
+                <td scope="col"># {{intervention.id}}</td>
+                <td class="col">{{intervention.title}}</td>
+                <td class="col">{{intervention.resume}}</td>
+                <td class="col">{{intervention.affectedTo}}</td>
+                <td class="col">{{intervention.client}}</td>
+                <td class="col">{{intervention.state}}</td>
             </tr>
         </tbody>
         <tfoot class="row">
@@ -30,6 +30,7 @@
 <script>
     import axios from 'axios';
     import lineOfTable from './../../components/MyComponent/lineOfTable';
+    import deleteTable from './../../components/MyComponent/deleteTable';
 
     export default {
         name: "Table",
@@ -38,7 +39,8 @@
             // interventions: Object(Array)
         },
         components: {
-            lineOfTable
+            lineOfTable,
+            deleteTable
         },
         /*data() {
             return {}

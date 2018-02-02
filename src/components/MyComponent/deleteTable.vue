@@ -1,10 +1,16 @@
 <template>
-    $END$
+    
 </template>
 
 <script>
     export default {
-        name: "delete-table"
+        name: "delete-table",
+        methods: {
+            deleteIntervention() {
+                let deleteData = document.querySelector(this.intervention.id).value
+
+            }
+        }
     }
 </script>
 
