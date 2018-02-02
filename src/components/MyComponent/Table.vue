@@ -45,6 +45,7 @@
         },*/
         data() {
             return {
+                oneIntervention: lineOfTable,
                 dataInterventions: []
             }
         },
@@ -59,6 +60,10 @@
                     .catch(function (error) {
                         console.log(error)
                     })
+            },
+            save() {
+
+                this.dataInterventions.push(oneIntervention)
             }
         },
         mounted() {
