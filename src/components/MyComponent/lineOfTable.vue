@@ -14,6 +14,7 @@
             state: Boolean
         },
         data() {
+
             return false
         }
     }
