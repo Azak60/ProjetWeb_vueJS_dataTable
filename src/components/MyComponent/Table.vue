@@ -1,25 +1,18 @@
 <template>
-    <table>
+    <table class="col-12">
         <thead class="row">
-            <tr>
-                <th class="col-2">Id</th>
-                <th class="col-2">Title</th>
-                <th class="col-2">Résumé</th>
-                <th class="col-2">Affected To</th>
-                <th class="col-2">Client</th>
-                <th class="col-2">State</th>
+            <tr class="col-12">
+                    <th class="col-6">Id</th>
+                    <th class="col-6">Title</th>
+                    <th class="col-6">Résumé</th>
+                    <th class="col-6">Affected To</th>
+                    <th class="col-6">Client</th>
+                    <th class="col-6">State</th>
             </tr>
         </thead>
 
         <tbody class="row">
-            <tr class="row" v-for="intervention in dataInterventions" :key="dataInterventions.id">
-                <td class="col-2"># {{intervention.id}}</td>
-                <td class="col-2">{{intervention.title}}</td>
-                <td class="col-2">{{intervention.msgIntervention}}</td>
-                <td class="col-2">{{intervention.affectedTo}}</td>
-                <td class="col-2">{{intervention.client}}</td>
-                <td class="col-2">{{intervention.state}}</td>
-            </tr>
+            <LineOfTable v-for="intervention in dataInterventions" :intervention="intervention" :key="dataInterventions.id"></LineOfTable>
         </tbody>
         <tfoot class="row">
 
@@ -29,20 +22,16 @@
 
 <script>
     import axios from 'axios';
-    import lineOfTable from './../../components/MyComponent/lineOfTable';
+    import LineOfTable from './LineOfTable';
 
     export default {
         name: "Table",
         props: {
-            msg: String,
-            // interventions: Object(Array)
+            msg: String
         },
         components: {
-            lineOfTable
+            LineOfTable
         },
-        /*data() {
-            return {}
-        },*/
         data() {
             return {
                 id: '',
@@ -51,8 +40,6 @@
                 affectedTo: '',
                 client: '',
                 state: '',
-
-                // oneIntervention: lineOfTable,
                 dataInterventions: []
             }
         },
@@ -75,7 +62,7 @@
                     affectedTo: this.affectedTo,
                     client: this.client,
                     state: this.state
-                }
+                };
 
                 this.dataInterventions.push(oneIntervention)
             }
