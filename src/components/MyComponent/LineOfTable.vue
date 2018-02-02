@@ -1,11 +1,11 @@
 <template>
-    <tr class="row">
-        <td class="col-2"># {{intervention.id}}</td>
-        <td class="col-2">{{intervention.title}}</td>
-        <td class="col-2">{{intervention.msgIntervention}}</td>
-        <td class="col-2">{{intervention.affectedTo}}</td>
-        <td class="col-2">{{intervention.client}}</td>
-        <td class="col-2">{{intervention.state}}</td>
+    <tr >
+        <td># {{intervention.id}}</td>
+        <td>{{intervention.title}}</td>
+        <td>{{intervention.msgIntervention}}</td>
+        <td>{{intervention.affectedTo}}</td>
+        <td>{{intervention.client}}</td>
+        <td>{{intervention.state}}</td>
     </tr>
 </template>
 

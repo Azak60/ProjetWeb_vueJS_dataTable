@@ -1,20 +1,20 @@
 <template>
-    <table class="col-12">
-        <thead class="row">
-            <tr class="col-12">
-                    <th class="col-6">Id</th>
-                    <th class="col-6">Title</th>
-                    <th class="col-6">Résumé</th>
-                    <th class="col-6">Affected To</th>
-                    <th class="col-6">Client</th>
-                    <th class="col-6">State</th>
+    <table >
+        <thead >
+            <tr>
+                    <th @click="filter('id')">Id</th>
+                    <th>Title</th>
+                    <th>Résumé</th>
+                    <th>Affected To</th>
+                    <th>Client</th>
+                    <th>State</th>
             </tr>
         </thead>
 
-        <tbody class="row">
-            <LineOfTable v-for="intervention in dataInterventions" :intervention="intervention" :key="dataInterventions.id"></LineOfTable>
+        <tbody>
+            <LineOfTable v-for="intervention in filteredInterventions" :intervention="intervention" :key="dataInterventions.id"></LineOfTable>
         </tbody>
-        <tfoot class="row">
+        <tfoot>
 
         </tfoot>
     </table>
@@ -40,7 +40,33 @@
                 affectedTo: '',
                 client: '',
                 state: '',
-                dataInterventions: []
+
+                dataInterventions: [],
+
+                order: "ASC",
+                orderBy: "id"
+            }
+        },
+        computed: {
+            filteredInterventions() {
+                let compare = function (filter) {
+                    return function (a,b) { //closure
+                        let c = a[filter],
+                            d = b[filter];
+
+                        if (c < d) {
+                            return -1;
+                        }else if (c > d) {
+                            return 1;
+                        } else {
+                            return 0;
+                        }
+                    };
+                };
+
+                let filter = compare("id"); //set filter
+
+                return this.dataInterventions.sort(filter)
             }
         },
         methods: {
@@ -65,6 +91,9 @@
                 };
 
                 this.dataInterventions.push(oneIntervention)
+            },
+            filter(col) {
+
             }
         },
         mounted() {
