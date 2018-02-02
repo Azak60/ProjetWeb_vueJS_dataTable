@@ -18,6 +18,7 @@
             <td>{{intervention.title}}</td>
             <td>{{intervention.msgIntervention}}</td>
             <td>{{intervention.affectedTo}}</td>
+            <td>{{intervention.client}}</td>
             <td>{{intervention.state}}</td>
         </tr>
         </tbody>
@@ -61,10 +62,10 @@
                         console.log(error)
                     })
             },
-            save() {
-
-                this.dataInterventions.push(oneIntervention)
-            }
+            // save() {
+            //
+            //     this.dataInterventions.push(oneIntervention)
+            // }
         },
         mounted() {
             this.fetchData()
