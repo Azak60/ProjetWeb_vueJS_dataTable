@@ -1,5 +1,5 @@
 <template>
-    <div class="row">
+    <div>
         <form method="post" action="#" id="formAddData"
         @submit.prevent="saveData()">
 
@@ -17,21 +17,26 @@
 
 <script>
     import LineOfTable from './LineOfTable'
+
     export default {
         name: "add-data",
         component: LineOfTable,
         data() {
             return {
-
-                idInput: '',
-                titleInput: '',
-                msgInterventionInput: '',
-                affectedToInput: '',
-                clientInput: '',
-                stateInput: '',
+                LineOfTable: {
+                    idInput: '',
+                    titleInput: '',
+                    msgInterventionInput: '',
+                    affectedToInput: '',
+                    clientInput: '',
+                    stateInput: ''
+                }
             }
         },
         methods: {
+            sendParentInfo() {
+                this.$emit('addIntervention', this.LineOfTable)
+            },
             saveData() {
                 this.dataInterventions.push()
                 this.newname = ''

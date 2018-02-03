@@ -1,5 +1,12 @@
 <template>
-    <div></div>
+    <tr>
+        <th>Id</th>
+        <th>Title</th>
+        <th>Résumé</th>
+        <th>Affected To</th>
+        <th>Client</th>
+        <th>State</th>
+    </tr>
 </template>
 
 <script>
@@ -8,7 +15,7 @@
         name: "HeaderTable",
         data() {
             return {
-                data: []
+
             }
         }
     }

@@ -1,18 +1,13 @@
 <template>
-    <table class="col-12">
-        <thead class="row">
-            <tr class="col-12">
-                    <th class="col-6">Id</th>
-                    <th class="col-6">Title</th>
-                    <th class="col-6">Résumé</th>
-                    <th class="col-6">Affected To</th>
-                    <th class="col-6">Client</th>
-                    <th class="col-6">State</th>
-            </tr>
+    <table>
+        <thead>
+            <HeaderTable></HeaderTable>
         </thead>
 
         <tbody class="row">
-            <LineOfTable v-for="intervention in dataInterventions" :intervention="intervention" :key="dataInterventions.id"></LineOfTable>
+            <LineOfTable v-for="intervention in dataInterventions" :intervention="intervention"
+                     :key="dataInterventions.id"
+                     :v-on:addLigne="addIntervention"></LineOfTable>
         </tbody>
         <tfoot class="row">
 
@@ -23,6 +18,7 @@
 <script>
     import axios from 'axios';
     import LineOfTable from './LineOfTable';
+    import HeaderTable from './HeaderTable';
 
     export default {
         name: "Table",
@@ -30,6 +26,7 @@
             msg: String
         },
         components: {
+            HeaderTable,
             LineOfTable
         },
         data() {
@@ -54,7 +51,7 @@
                         console.log(error)
                     })
             },
-            save() {
+            addIntervention() {
                 const simpleIntervention = {
                     id: this.id,
                     title: this.title,
@@ -64,7 +61,7 @@
                     state: this.state
                 };
 
-                this.dataInterventions.push(oneIntervention)
+                this.dataInterventions.push(simpleIntervention)
             }
         },
         mounted() {
