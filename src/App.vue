@@ -1,27 +1,42 @@
 <template>
     <div id="app" class="container">
         <img src="./assets/logo.png">
-        <ToolData :add="true"></ToolData>
-        <!--<EditData :v-if:Table.data().isClicked="true"></EditData>-->
-        <Table :msg="'Welcome to the DataTable'"></Table>
+
+        <AddData></AddData>
+
+        <InterventionsList :msg="'Welcome to the DataTable'" :newintervention="newintervention"></InterventionsList>
+
     </div>
 </template>
 
 <script>
     import Table from './components/MyComponent/Table';
-    import ToolData from './components/MyComponent/ToolData';
+    import AddData from './components/MyComponent/AddData';
 
     export default {
         name: 'app',
         components: {
-            ToolData,
-            Table
+            InterventionsList:Table,
+            AddData
         },
-        data() {
-            return {
-            }
-        }
 
+        data(){
+            return {
+                newintervention: ''
+            }
+        },
+
+        methods: {
+            bindEvents() {
+                this.$on('create', (value) => {
+                    this.newintervention = value
+                })
+            }
+        },
+
+        mounted() {
+            this.bindEvents()
+        }
     }
 </script>
 
