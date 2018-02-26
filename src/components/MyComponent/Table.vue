@@ -15,18 +15,6 @@
 
         <tbody>
                 <LineOfTable v-for="intervention in filteredInterventions" :intervention="intervention" :key="dataInterventions.id"></LineOfTable>
-
-                <!--<LineOfTable v-for="intervention in interventionsList" :interventionsList="interventionsList">Hello</LineOfTable>-->
-
-            <!--<tr v-for="intervention in interventionsList" :key="interventionsList.id">-->
-                <!--<td>{{intervention.id}}</td>-->
-                <!--<td>{{intervention.title}}</td>-->
-                <!--<td>{{intervention.msgIntervention}}</td>-->
-                <!--<td>{{intervention.affectedTo}}</td>-->
-                <!--<td>{{intervention.client}}</td>-->
-                <!--<td>{{intervention.state}}</td>-->
-            <!--</tr>-->
-
         </tbody>
         <tfoot>
 
@@ -52,7 +40,9 @@
         watch: {
             newintervention(){
                 this.dataInterventions.push(this.newintervention)
-            }
+            },
+
+
         },
 
         data() {
@@ -65,12 +55,14 @@
                 state: '',
 
                 dataInterventions: [],
+                // intervention: {},
 
                 order: "ASC",
                 orderBy: "id"
             }
         },
         computed: {
+
             filteredInterventions() {
                 let compare = function (filter) {
                     return function (a,b) { //closure
@@ -96,7 +88,11 @@
                 } else {
                     return data.reverse()
                 }
-            }
+            },
+
+            // getLastId(){
+            //     return this.intervention[this.intervention.length - 1].id;
+            // }
         },
 
         methods: {
@@ -104,25 +100,14 @@
                 axios.get('https://raw.githubusercontent.com/mdubourg001/datatable_vuejs/master/src/assets/MOCK_DATA.json')
                     .then((response) => {
                         console.log(this);
-                        this.dataInterventions = response.data
+                        this.dataInterventions = response.data;
+
+                        this.$parent.$emit('newData', (response.data));
                     })
                     .catch(function (error) {
                         console.log(error)
                     })
             },
-
-            // save() {
-            //     const simpleIntervention = {
-            //         id: this.id,
-            //         title: this.title,
-            //         msgIntervention: this.msgIntervention,
-            //         affectedTo: this.affectedTo,
-            //         client: this.client,
-            //         state: this.state
-            //     };
-            //
-            //     this.dataInterventions.push(oneIntervention)
-            // },
 
             filterByCol(col) {
                 if (this.orderBy == col) {

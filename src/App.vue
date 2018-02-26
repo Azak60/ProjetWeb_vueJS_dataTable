@@ -2,7 +2,7 @@
     <div id="app" class="container">
         <img src="./assets/logo.png">
 
-        <AddData></AddData>
+        <AddData :newid="newid"></AddData>
 
         <InterventionsList :msg="'Welcome to the DataTable'" :newintervention="newintervention"></InterventionsList>
 
@@ -22,17 +22,26 @@
 
         data(){
             return {
-                newintervention: ''
+                newintervention: '',
+                column: '',
+                newid: '',
             }
         },
+
 
         methods: {
             bindEvents() {
                 this.$on('create', (value) => {
-                    this.newintervention = value
+                    this.newintervention = value;
+                });
+
+                this.$on('newData', (interventionsList) => {
+                    this.newid = interventionsList.length + 1;
                 })
             }
         },
+
+
 
         mounted() {
             this.bindEvents()

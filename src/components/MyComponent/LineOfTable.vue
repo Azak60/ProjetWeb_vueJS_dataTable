@@ -1,6 +1,6 @@
 <template>
     <tr>
-        <td># {{intervention.id}}</td>
+        <td> # {{intervention.id}}</td>
         <td>{{intervention.title}}</td>
         <td>{{intervention.msgIntervention}}</td>
         <td>{{intervention.affectedTo}}</td>
@@ -27,7 +27,7 @@
         },
         data() {
             return {
-                id: '',
+                id: "",
                 title: '',
                 msgIntervention: '',
                 affectedTo: '',
