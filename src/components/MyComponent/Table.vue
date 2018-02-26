@@ -1,15 +1,20 @@
 <template>
-    <table>
-        <thead>
-            <HeaderTable></HeaderTable>
+    <table >
+        <thead >
+            <tr>
+                    <th @click="filter('id')">Id</th>
+                    <th>Title</th>
+                    <th>Résumé</th>
+                    <th>Affected To</th>
+                    <th>Client</th>
+                    <th>State</th>
+            </tr>
         </thead>
 
-        <tbody class="row">
-            <LineOfTable v-for="intervention in dataInterventions" :intervention="intervention"
-                     :key="dataInterventions.id"
-                     :v-on:addLigne="addIntervention"></LineOfTable>
+        <tbody>
+            <LineOfTable v-for="intervention in filteredInterventions" :intervention="intervention" :key="dataInterventions.id"></LineOfTable>
         </tbody>
-        <tfoot class="row">
+        <tfoot>
 
         </tfoot>
     </table>
@@ -37,7 +42,33 @@
                 affectedTo: '',
                 client: '',
                 state: '',
-                dataInterventions: []
+
+                dataInterventions: [],
+
+                order: "ASC",
+                orderBy: "id"
+            }
+        },
+        computed: {
+            filteredInterventions() {
+                let compare = function (filter) {
+                    return function (a,b) { //closure
+                        let c = a[filter],
+                            d = b[filter];
+
+                        if (c < d) {
+                            return -1;
+                        }else if (c > d) {
+                            return 1;
+                        } else {
+                            return 0;
+                        }
+                    };
+                };
+
+                let filter = compare("id"); //set filter
+
+                return this.dataInterventions.sort(filter)
             }
         },
         methods: {
@@ -62,6 +93,9 @@
                 };
 
                 this.dataInterventions.push(simpleIntervention)
+            },
+            filter(col) {
+
             }
         },
         mounted() {

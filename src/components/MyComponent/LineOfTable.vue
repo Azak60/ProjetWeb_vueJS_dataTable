@@ -1,5 +1,5 @@
 <template>
-    <tr>
+    <tr >
         <td># {{intervention.id}}</td>
         <td>{{intervention.title}}</td>
         <td>{{intervention.msgIntervention}}</td>
