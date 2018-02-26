@@ -2,9 +2,11 @@
     <div id="app" class="container">
         <img src="./assets/logo.png">
 
-        <AddData></AddData>
+        <AddData :newid="newid"></AddData>
 
-        <InterventionsList :msg="'Welcome to the DataTable'" :newIntervention="newIntervention"></InterventionsList>
+        <InterventionsList
+                :newIntervention="newIntervention">
+        </InterventionsList>
 
     </div>
 </template>
@@ -22,25 +24,36 @@
 
         data(){
             return {
-                newIntervention: ''
+                newIntervention: '',
+
+                updatedIntervention: "",
+                idUpdtedIntervention: "",
+
+                column: '',
+                newid: '',
+
             }
         },
 
         methods: {
             bindEvents() {
-                this.$on('create', (value) => {
-                    this.newIntervention = value
-                })
+                // Récupérer le nombre d'intervention pour déterminer l'id qu'aura la prochaine intervention créée
+                this.$on('newData', (interventionsList) => {
+                    this.newid = interventionsList.length + 1;
+                });
 
-                this.$on('delete', (value) => {
-                    this.intervention = value
-                })
+                // Création d'une intervention
+                this.$on('create', (createdIntervention) => {
+                    this.newIntervention = createdIntervention;
+                });
+
             }
         },
 
         mounted() {
             this.bindEvents()
         }
+
     }
 </script>
 

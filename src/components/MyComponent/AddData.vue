@@ -1,6 +1,6 @@
 <template>
     <div class="row">
-        <form method="post" action="#" id="formAddData" @submit.prevent="saveData()">
+        <form method="post" action="#" id="formAddData" @submit.prevent="addIntervention()">
             <!--<form method="post" action="#" id="formAddData" @submit.prevent="addIntervention()">-->
 
             <h2>Ajouter une intervention</h2>
@@ -10,35 +10,30 @@
             <input type="text" placeholder="Client" name="txtClientInput" id="clientInput" v-model="clientInput" />
             <input type="text" placeholder="Etat" name="txtStateInput" id="stateInput" v-model="stateInput" />
 
-            <input type="submit" value="Ajouter Intervention" />
+            <input type="submit" value="Ajouter une intervention" />
         </form>
     </div>
+
+
 </template>
 
 <script>
-    import LineOfTable from './LineOfTable'
+    // import LineOfTable from './LineOfTable'
 
     export default {
 
         name: "add-data",
-        component: LineOfTable,
+        // components:{
+        //     LineOfTable
+        // },
 
         props: [
-          "dataInterventions"
+            'newid'
         ],
 
         data() {
             return {
-                showComponent: false,
-                ToolData: {
-                    idInput: '',
-                    titleInput: '',
-                    msgInterventionInput: '',
-                    affectedToInput: '',
-                    clientInput: '',
-                    stateInput: ''
-                },
-                // idInput: 0,
+                id: 0,
                 titleInput: '',
                 msgInterventionInput: '',
                 affectedToInput: '',
@@ -46,33 +41,34 @@
                 stateInput: '',
 
                 // Pour incrémenter l'id
-                count: 0,
 
-                oneIntervention: {
-                    id: "",
-                    title: "",
-                    msgIntervention: "",
-                    affectedTo: "",
-                    client: "",
-                    state: ""
-                }
+                // newIntervention: {
+                //     id: "",
+                //     title: "",
+                //     msgIntervention: "",
+                //     affectedTo: "",
+                //     client: "",
+                //     state:""
+                // }
             }
         },
         methods: {
-            saveData() {
-                // J'incrémente count, donc l'id
-                this.count++;
+            addIntervention() {
+                // // J'incrémente count, donc l'id
+                // this.count++;
 
-
-                const item = {
-                    id: this.count,
+                const newIntervention ={
+                    id: this.newid,
                     title: this.titleInput,
                     msgIntervention: this.msgInterventionInput,
                     affectedTo: this.affectedToInput,
                     client: this.clientInput,
                     state: this.stateInput
                 };
-                this.$parent.$emit('create', item);
+
+
+
+                this.$parent.$emit('create', newIntervention);
 
                 // Mettre à zéro nos variables pour la prochaine création d'intervention
                 this.titleInput = "";
@@ -80,8 +76,8 @@
                 this.affectedToInput = "";
                 this.clientInput = "";
                 this.stateInput = ""
-                this.newname = ""
-            }
+
+            },
         }
     }
 </script>
