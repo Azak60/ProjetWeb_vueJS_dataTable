@@ -1,6 +1,6 @@
 <template>
-    <table >
-        <thead >
+    <table>
+        <thead>
             <tr>
                     <th @click="filter('id')">Id</th>
                     <th>Title</th>
@@ -12,7 +12,8 @@
         </thead>
 
         <tbody>
-            <LineOfTable v-for="intervention in filteredInterventions" :intervention="intervention" :key="dataInterventions.id"></LineOfTable>
+            <LineOfTable></LineOfTable>
+            <!--<LineOfTable v-for="intervention in filteredInterventions" :intervention="intervention" :key="dataInterventions.id"></LineOfTable>-->
         </tbody>
         <tfoot>
 
@@ -28,7 +29,6 @@
     export default {
         name: "Table",
         props: {
-            msg: String
         },
         components: {
             HeaderTable,
@@ -36,14 +36,15 @@
         },
         data() {
             return {
-                id: '',
-                title: '',
-                msgIntervention: '',
-                affectedTo: '',
-                client: '',
-                state: '',
-
-                dataInterventions: [],
+                dataInterventions: [{
+                    idInput: '',
+                    titleInput: '',
+                    msgInterventionInput: '',
+                    affectedToInput: '',
+                    clientInput: '',
+                    stateInput: '',
+                    isClicked: ''
+                }],
 
                 order: "ASC",
                 orderBy: "id"
@@ -94,7 +95,7 @@
 
                 this.dataInterventions.push(simpleIntervention)
             },
-            filter(col) {
+            filter(col){
 
             }
         },

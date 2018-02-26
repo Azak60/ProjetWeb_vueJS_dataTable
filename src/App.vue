@@ -1,21 +1,27 @@
 <template>
     <div id="app" class="container">
         <img src="./assets/logo.png">
-        <AddData></AddData>
+        <ToolData :add="true"></ToolData>
+        <!--<EditData :v-if:Table.data().isClicked="true"></EditData>-->
         <Table :msg="'Welcome to the DataTable'"></Table>
     </div>
 </template>
 
 <script>
     import Table from './components/MyComponent/Table';
-    import AddData from './components/MyComponent/AddData';
+    import ToolData from './components/MyComponent/ToolData';
 
     export default {
         name: 'app',
         components: {
-            Table,
-            AddData
+            ToolData,
+            Table
+        },
+        data() {
+            return {
+            }
         }
+
     }
 </script>
 
