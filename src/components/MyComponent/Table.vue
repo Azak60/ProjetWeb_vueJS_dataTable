@@ -14,7 +14,7 @@
         </thead>
 
         <tbody>
-                <LineOfTable v-for="intervention in filteredInterventions" :intervention="intervention" :key="dataInterventions.id"></LineOfTable>
+                <LineOfTable v-for="intervention,index in filteredInterventions" :intervention="intervention" :index="index"></LineOfTable>
         </tbody>
         <tfoot>
 
@@ -31,18 +31,12 @@
         name: "Table",
         props: {
             msg: String,
-            newintervention: ''
+            newIntervention: '',
+            updatedIntervention: '',
+            idUpdtedIntervention: ''
         },
         components: {
             LineOfTable
-        },
-
-        watch: {
-            newintervention(){
-                this.dataInterventions.push(this.newintervention)
-            },
-
-
         },
 
         data() {
@@ -58,9 +52,23 @@
                 // intervention: {},
 
                 order: "ASC",
-                orderBy: "id"
+                orderBy: "id",
+
+
             }
         },
+
+        watch: {
+            newIntervention(){
+                this.dataInterventions.push(this.newIntervention)
+            },
+
+            updatedIntervention(){
+                this.dataInterventions[this.idUpdtedIntervention] = this.updatedIntervention
+                console.log(this.dataInterventions);
+            }
+        },
+
         computed: {
 
             filteredInterventions() {
@@ -124,6 +132,12 @@
         },
         mounted() {
             this.fetchData()
+
+            // Modification d'une intervention
+            this.$on('update', (updatedIntervention, index)=> {
+                this.dataInterventions[index] = updatedIntervention;
+                console.log(this.dataInterventions)
+            })
         }
     }
 </script>

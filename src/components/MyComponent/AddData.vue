@@ -18,12 +18,14 @@
 </template>
 
 <script>
-    import LineOfTable from './LineOfTable'
+    // import LineOfTable from './LineOfTable'
 
     export default {
 
         name: "add-data",
-        component: LineOfTable,
+        // components:{
+        //     LineOfTable
+        // },
 
         props: [
             'newid'
@@ -65,6 +67,8 @@
                     client: this.clientInput,
                     state: this.stateInput
                 };
+
+
 
                 this.$parent.$emit('create', newIntervention);
 

@@ -4,7 +4,9 @@
 
         <AddData :newid="newid"></AddData>
 
-        <InterventionsList :msg="'Welcome to the DataTable'" :newintervention="newintervention"></InterventionsList>
+        <InterventionsList
+                :newIntervention="newIntervention">
+        </InterventionsList>
 
     </div>
 </template>
@@ -22,22 +24,30 @@
 
         data(){
             return {
-                newintervention: '',
+                newIntervention: '',
+
+                updatedIntervention: "",
+                idUpdtedIntervention: "",
+
                 column: '',
                 newid: '',
+
             }
         },
 
 
         methods: {
             bindEvents() {
-                this.$on('create', (value) => {
-                    this.newintervention = value;
-                });
-
+                // Récupérer le nombre d'intervention pour déterminer l'id qu'aura la prochaine intervention créée
                 this.$on('newData', (interventionsList) => {
                     this.newid = interventionsList.length + 1;
-                })
+                });
+
+                // Création d'une intervention
+                this.$on('create', (createdIntervention) => {
+                    this.newIntervention = createdIntervention;
+                });
+
             }
         },
 
