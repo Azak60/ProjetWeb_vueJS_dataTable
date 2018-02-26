@@ -4,7 +4,7 @@
 
         <AddData></AddData>
 
-        <InterventionsList :msg="'Welcome to the DataTable'" :newintervention="newintervention"></InterventionsList>
+        <InterventionsList :msg="'Welcome to the DataTable'" :newIntervention="newIntervention"></InterventionsList>
 
     </div>
 </template>
@@ -22,14 +22,18 @@
 
         data(){
             return {
-                newintervention: ''
+                newIntervention: ''
             }
         },
 
         methods: {
             bindEvents() {
                 this.$on('create', (value) => {
-                    this.newintervention = value
+                    this.newIntervention = value
+                })
+
+                this.$on('delete', (value) => {
+                    this.intervention = value
                 })
             }
         },

@@ -8,14 +8,15 @@
                 <th @click="filterByCol('affectedTo')">Affected To</th>
                 <th @click="filterByCol('client')">Client</th>
                 <th @click="filterByCol('state')">State</th>
+                <th>Actions</th>
 
                 <!--<th v-for="column in colName">{{column}}</th>-->
             </tr>
         </thead>
 
         <tbody>
-            <LineOfTable></LineOfTable>
-            <!--<LineOfTable v-for="intervention in filteredInterventions" :intervention="intervention" :key="dataInterventions.id"></LineOfTable>-->
+            <!--<LineOfTable></LineOfTable>-->
+            <LineOfTable v-for="intervention in filteredInterventions" :intervention="intervention" :key="dataInterventions.id"></LineOfTable>
         </tbody>
         <tfoot>
 
@@ -25,6 +26,7 @@
 
 <script>
     import axios from 'axios';
+    import octicons from 'octicons'
     import LineOfTable from './LineOfTable.vue';
     import AddData from './AddData.vue';
 
@@ -32,18 +34,11 @@
         name: "Table",
         props: {
             msg: String,
-            newintervention: ''
+            newIntervention: ''
         },
         components: {
             LineOfTable
         },
-
-        watch: {
-            newintervention(){
-                this.dataInterventions.push(this.newintervention)
-            }
-        },
-
         data() {
             return {
                 id: 0,
@@ -80,7 +75,7 @@
 
                 var data = this.dataInterventions.sort(filter);
 
-                if (this.order == "ASC") {
+                if (this.order === "ASC") {
                     return data
                 } else {
                     return data.reverse()
@@ -110,11 +105,9 @@
 
                 this.dataInterventions.push(oneIntervention)
             },
-            filter(col) {
-
             filterByCol(col) {
                 if (this.orderBy == col) {
-                    if (this.order == "ASC") {
+                    if (this.order === "ASC") {
                         this.order = "DESC"
                     } else {
                         this.order = "ASC"
@@ -125,8 +118,15 @@
                 }
             }
         },
-        mounted() {
-            this.fetchData()
+        watch: {
+            newIntervention () {
+                this.dataInterventions.push(this.newIntervention)
+            },
+            deleteIntervention (index) {
+                if ( index >= 0 ) {
+                    this.dataInterventions.splice(index, 1)
+                }
+            }
         }
     }
 </script>

@@ -7,7 +7,7 @@
             <input type="text" placeholder="Objet de l'intervention ..." name="txtTitleInput" id="titleInput" v-model="titleInput" />
             <input type="text" placeholder="Message de l'intervention ..." name="txtMsgInterventionInput" id="msgInterventionInput" v-model="msgInterventionInput" />
             <input type="text" placeholder="Affecté à ..." name="txtAffectedToInput" id="AffectedToInput" v-model="affectedToInput" />
-            <input type="text" placeholder="Client" name="txtClientInput" id="clientInput" v-model="titleInput" />
+            <input type="text" placeholder="Client" name="txtClientInput" id="clientInput" v-model="clientInput" />
             <input type="text" placeholder="Etat" name="txtStateInput" id="stateInput" v-model="stateInput" />
 
             <input type="submit" value="Ajouter Intervention" />
@@ -37,7 +37,7 @@
                     affectedToInput: '',
                     clientInput: '',
                     stateInput: ''
-                }
+                },
                 // idInput: 0,
                 titleInput: '',
                 msgInterventionInput: '',
@@ -54,7 +54,7 @@
                     msgIntervention: "",
                     affectedTo: "",
                     client: "",
-                    state:""
+                    state: ""
                 }
             }
         },
@@ -64,7 +64,7 @@
                 this.count++;
 
 
-                const item ={
+                const item = {
                     id: this.count,
                     title: this.titleInput,
                     msgIntervention: this.msgInterventionInput,
@@ -80,10 +80,7 @@
                 this.affectedToInput = "";
                 this.clientInput = "";
                 this.stateInput = ""
-
-            },
-                this.dataInterventions.push();
-                this.newname = ''
+                this.newname = ""
             }
         }
     }

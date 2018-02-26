@@ -6,6 +6,7 @@
         <td>{{intervention.affectedTo}}</td>
         <td>{{intervention.client}}</td>
         <td>{{intervention.state}}</td>
+        <td><img src="/node_modules/octicons/build/svg/trashcan.svg" /><input type="button" value="Supprimer" @click="deleteIntervention(intervention.id)"/></td>
     </tr>
 </template>
 
@@ -27,7 +28,7 @@
         },
         data() {
             return {
-                id: '',
+                id: 0,
                 title: '',
                 msgIntervention: '',
                 affectedTo: '',
