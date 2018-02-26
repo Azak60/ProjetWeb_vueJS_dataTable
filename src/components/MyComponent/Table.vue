@@ -2,17 +2,31 @@
     <table >
         <thead >
             <tr>
-                    <th @click="filter('id')">Id</th>
-                    <th>Title</th>
-                    <th>Résumé</th>
-                    <th>Affected To</th>
-                    <th>Client</th>
-                    <th>State</th>
+                <th @click="filterByCol('id')">Id</th>
+                <th @click="filterByCol('title')">Title</th>
+                <th @click="filterByCol('msgIntervention')">Résumé</th>
+                <th @click="filterByCol('affectedTo')">Affected To</th>
+                <th @click="filterByCol('client')">Client</th>
+                <th @click="filterByCol('state')">State</th>
+
+                <!--<th v-for="column in colName">{{column}}</th>-->
             </tr>
         </thead>
 
         <tbody>
-            <LineOfTable v-for="intervention in filteredInterventions" :intervention="intervention" :key="dataInterventions.id"></LineOfTable>
+                <LineOfTable v-for="intervention in filteredInterventions" :intervention="intervention" :key="dataInterventions.id"></LineOfTable>
+
+                <!--<LineOfTable v-for="intervention in interventionsList" :interventionsList="interventionsList">Hello</LineOfTable>-->
+
+            <!--<tr v-for="intervention in interventionsList" :key="interventionsList.id">-->
+                <!--<td>{{intervention.id}}</td>-->
+                <!--<td>{{intervention.title}}</td>-->
+                <!--<td>{{intervention.msgIntervention}}</td>-->
+                <!--<td>{{intervention.affectedTo}}</td>-->
+                <!--<td>{{intervention.client}}</td>-->
+                <!--<td>{{intervention.state}}</td>-->
+            <!--</tr>-->
+
         </tbody>
         <tfoot>
 
@@ -22,19 +36,28 @@
 
 <script>
     import axios from 'axios';
-    import LineOfTable from './LineOfTable';
+    import LineOfTable from './LineOfTable.vue';
+    import AddData from './AddData.vue';
 
     export default {
         name: "Table",
         props: {
-            msg: String
+            msg: String,
+            newintervention: ''
         },
         components: {
             LineOfTable
         },
+
+        watch: {
+            newintervention(){
+                this.dataInterventions.push(this.newintervention)
+            }
+        },
+
         data() {
             return {
-                id: '',
+                id: 0,
                 title: '',
                 msgIntervention: '',
                 affectedTo: '',
@@ -64,11 +87,18 @@
                     };
                 };
 
-                let filter = compare("id"); //set filter
+                let filter = compare(this.orderBy); //set filter
 
-                return this.dataInterventions.sort(filter)
+                var data = this.dataInterventions.sort(filter);
+
+                if (this.order == "ASC") {
+                    return data
+                } else {
+                    return data.reverse()
+                }
             }
         },
+
         methods: {
             fetchData() {
                 axios.get('https://raw.githubusercontent.com/mdubourg001/datatable_vuejs/master/src/assets/MOCK_DATA.json')
@@ -80,20 +110,31 @@
                         console.log(error)
                     })
             },
-            save() {
-                const simpleIntervention = {
-                    id: this.id,
-                    title: this.title,
-                    msgIntervention: this.msgIntervention,
-                    affectedTo: this.affectedTo,
-                    client: this.client,
-                    state: this.state
-                };
 
-                this.dataInterventions.push(oneIntervention)
-            },
-            filter(col) {
+            // save() {
+            //     const simpleIntervention = {
+            //         id: this.id,
+            //         title: this.title,
+            //         msgIntervention: this.msgIntervention,
+            //         affectedTo: this.affectedTo,
+            //         client: this.client,
+            //         state: this.state
+            //     };
+            //
+            //     this.dataInterventions.push(oneIntervention)
+            // },
 
+            filterByCol(col) {
+                if (this.orderBy == col) {
+                    if (this.order == "ASC") {
+                        this.order = "DESC"
+                    } else {
+                        this.order = "ASC"
+                    }
+                } else {
+                    this.order = "ASC"
+                    this.orderBy = col
+                }
             }
         },
         mounted() {

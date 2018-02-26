@@ -1,8 +1,11 @@
 <template>
     <div id="app" class="container">
         <img src="./assets/logo.png">
+
         <AddData></AddData>
-        <Table :msg="'Welcome to the DataTable'"></Table>
+
+        <InterventionsList :msg="'Welcome to the DataTable'" :newintervention="newintervention"></InterventionsList>
+
     </div>
 </template>
 
@@ -13,9 +16,28 @@
     export default {
         name: 'app',
         components: {
-            Table,
+            InterventionsList:Table,
             AddData
+        },
+
+        data(){
+            return {
+                newintervention: ''
+            }
+        },
+
+        methods: {
+            bindEvents() {
+                this.$on('create', (value) => {
+                    this.newintervention = value
+                })
+            }
+        },
+
+        mounted() {
+            this.bindEvents()
         }
+
     }
 </script>
 

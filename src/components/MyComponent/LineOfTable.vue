@@ -1,5 +1,5 @@
 <template>
-    <tr >
+    <tr>
         <td># {{intervention.id}}</td>
         <td>{{intervention.title}}</td>
         <td>{{intervention.msgIntervention}}</td>
@@ -10,11 +10,14 @@
 </template>
 
 <script>
+
+    import AddData from './AddData.vue'
+
     export default {
         name: "line-of-table",
         props: {
             intervention: {
-                id: String,
+                id: Number,
                 title: String,
                 msgIntervention: String,
                 affectedTo: String,
