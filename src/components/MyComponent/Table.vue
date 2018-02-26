@@ -1,5 +1,5 @@
 <template>
-    <table >
+    <table class="table table-bordered">
         <thead >
             <tr>
                 <th @click="filterByCol('id')">Id</th>

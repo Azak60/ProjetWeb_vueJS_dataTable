@@ -9,30 +9,32 @@
         <td >
             <input type="text" @keyup.enter='saveEdit()' v-if='editState' v-model='title'>
             <span v-else>{{title}}</span>
-            <p @click="edit()">Edit</p>
         </td>
 
         <td >
-            <input type="text" @keyup.enter='saveEdit()' v-if='editState' v-model='msgIntervention'>
+            <input type="text" @keyup.enter='saveEdit()' @keyup.escape="switchEdit()" v-if='editState' v-model='msgIntervention'>
             <span v-else>{{msgIntervention}}</span>
-            <p @click="edit()">Edit</p>
         </td>
 
+        <td >
+            <input type="text" @keyup.enter='saveEdit()' @keyup.escape="switchEdit()" v-if='editState' v-model='affectedTo'>
+            <span v-else>{{affectedTo}}</span>
+        </td>
 
-        <td v-if='editState'>{{intervention.title}}</td>
-        <td v-else>{{intervention.title}}</td>
+        <td >
+            <input type="text" @keyup.enter='saveEdit()' @keyup.escape="switchEdit()" v-if='editState' v-model='client'>
+            <span v-else>{{client}}</span>
+        </td>
 
-        <td v-if='editState'>{{intervention.msgIntervention}}</td>
-        <td v-if='!editState'>{{intervention.msgIntervention}}</td>
+        <td >
+            <input type="text" @keyup.enter='saveEdit()' @keyup.escape="switchEdit()" v-if='editState' v-model='state'>
+            <span v-else>{{state}}</span>
 
-        <td v-if='editState'>{{intervention.affectedTo}}</td>
-        <td v-if='!editState'>{{intervention.affectedTo}}</td>
+        </td>
+            <button type="button" class="btn btn-info" @click="switchEdit()">Modifier</button>
+        <td>
 
-        <td v-if='editState'>{{intervention.client}}</td>
-        <td v-if='!editState'>{{intervention.client}}</td>
-
-        <td v-if='editState'>{{intervention.state}}</td>
-        <td v-if='!editState'>{{intervention.state}}</td>
+        </td>
     </tr>
 </template>
 
@@ -77,7 +79,7 @@
         },
 
         methods:{
-            edit(){
+            switchEdit(){
                 this.editState = !this.editState;
             },
 
