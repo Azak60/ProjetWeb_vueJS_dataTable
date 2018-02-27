@@ -9,13 +9,11 @@
                 <th @click="filterByCol('client')">Client</th>
                 <th @click="filterByCol('state')">State</th>
                 <th>Actions</th>
-
-                <!--<th v-for="column in colName">{{column}}</th>-->
             </tr>
         </thead>
 
         <tbody>
-                <LineOfTable v-for="intervention,index in filteredInterventions" :intervention="intervention" :index="index"></LineOfTable>
+                <LineOfTable v-for="(intervention, index) in filteredInterventions" :intervention="intervention" :key="index"></LineOfTable>
         </tbody>
         <tfoot>
 
@@ -34,7 +32,7 @@
             msg: String,
             newIntervention: '',
             updatedIntervention: '',
-            idUpdtedIntervention: ''
+            idUpdatedIntervention: ''
         },
         components: {
             LineOfTable
@@ -62,13 +60,12 @@
             },
 
             updatedIntervention(){
-                this.dataInterventions[this.idUpdtedIntervention] = this.updatedIntervention
+                this.dataInterventions[this.idUpdatedIntervention] = this.updatedIntervention
                 console.log(this.dataInterventions);
             }
         },
 
         computed: {
-
             filteredInterventions() {
                 let compare = function (filter) {
                     return function (a,b) { //closure
@@ -77,7 +74,7 @@
 
                         if (c < d) {
                             return -1;
-                        }else if (c > d) {
+                        } else if (c > d) {
                             return 1;
                         } else {
                             return 0;
@@ -98,6 +95,21 @@
         },
 
         methods: {
+            // readTextFile(file) {
+            //
+            //     var rawFile = new XMLHttpRequest();
+            //     rawFile.open("GET", file, false);
+            //
+            //     rawFile.onreadystatechange = function () {
+            //         if(rawFile.readyState === 4) {
+            //             if(rawFile.status === 200 || rawFile.status === 0) {
+            //                 this.$parent.$emit('newData', (rawFile.responseText));
+            //             }
+            //         }
+            //     }
+            //
+            //     rawFile.send(null);
+            // },
             fetchData() {
                 axios.get('https://raw.githubusercontent.com/mdubourg001/datatable_vuejs/master/src/assets/MOCK_DATA.json')
                     .then((response) => {
@@ -122,15 +134,26 @@
                     this.order = "ASC"
                     this.orderBy = col
                 }
-            }
+            },
+
+
+
         },
         mounted() {
             this.fetchData()
+            // this.readTextFile("file:\\C:\\wamp64\\www\\CESI_VueJS_Introduction\\ProjetWeb_vueJS_dataTable\\src\\assets\\datas.json")
 
             // Modification d'une intervention
             this.$on('update', (updatedIntervention, index)=> {
+                console.log(updatedIntervention)
                 this.dataInterventions[index] = updatedIntervention;
                 console.log(this.dataInterventions)
+            })
+
+            // Suppression d'une intervention
+            this.$on('delete', (idIntervention) => {
+                console.log(idIntervention)
+                this.dataInterventions.splice(idIntervention, 1)
             })
         }
     }

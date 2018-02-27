@@ -64,40 +64,15 @@
                 this.$emit('addIntervention', this.ToolData)
             },
             saveData(action) {
-                this.$emit('saveData')
+                this.$emit('saveData');
                 this.newname = ''
             },
-            show(action) {
-                // if (action=true) {
-                //     this.show(true)
-                // }
-                // else {
-                //     this.show(false)
-                // }
-                // // if (action.equals("'add")) {
-                // //     if (this.add.equals(true)) {
-                // //         return true
-                // //     }
-                // //     else {
-                // //         return false
-                // //     }
-                // // }
-                // // if (true) {
-                //     if (this.edit.equals(true)) {
-                //         return true
-                //     }
-                //     else {
-                //         return false
-                //     }
-                // // }
-
-            },
-            mounted: {
-                init: {
-                    data() {
-                        add = true;
-                        edit = false;
-                    }
+        },
+        mounted: {
+            init: {
+                data() {
+                    add = true;
+                    edit = false;
                 }
             }
         }
