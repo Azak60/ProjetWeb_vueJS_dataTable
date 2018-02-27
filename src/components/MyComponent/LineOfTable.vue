@@ -34,7 +34,13 @@
             <button type="button" class="btn btn-info" @click="switchEdit()"><i class="fas fa-edit"></i></button><br/>
             <button type="button" class="btn btn-danger" @click="deleteIntervention(intervention.id)"><i class="fas fa-trash-alt"></i></button>
         <td>
+            <!-- Bouton pour modifier la ligne -->
+            <button type="button" class="btn btn-info" @click="switchEdit()">Modifier</button>
 
+            <!-- Button pour activer le modal -->
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                Voir plus...
+            </button>
         </td>
     </tr>
 </template>
@@ -52,7 +58,9 @@
                 affectedTo: String,
                 client: String,
                 state: Boolean,
-                index: null
+                index: null,
+
+                nbRows: '',
             }
         },
         data() {
@@ -93,8 +101,6 @@
                     client: this.client,
                     state: this.state
                 };
-
-                console.log(updatedIntervention);
 
                 this.$parent.$emit('update', updatedIntervention, this.index);
 

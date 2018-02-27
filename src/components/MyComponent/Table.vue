@@ -24,7 +24,6 @@
 <script>
     import axios from 'axios';
     import LineOfTable from './LineOfTable.vue';
-    import AddData from './AddData.vue';
 
     export default {
         name: "Table",
@@ -66,6 +65,7 @@
         },
 
         computed: {
+
             filteredInterventions() {
                 let compare = function (filter) {
                     return function (a,b) { //closure
@@ -84,9 +84,9 @@
 
                 let filter = compare(this.orderBy); //set filter
 
-                var data = this.dataInterventions.sort(filter);
+                let data = this.dataInterventions.sort(filter);
 
-                if (this.order == "ASC") {
+                if (this.order === "ASC") {
                     return data
                 } else {
                     return data.reverse()
@@ -95,21 +95,6 @@
         },
 
         methods: {
-            // readTextFile(file) {
-            //
-            //     var rawFile = new XMLHttpRequest();
-            //     rawFile.open("GET", file, false);
-            //
-            //     rawFile.onreadystatechange = function () {
-            //         if(rawFile.readyState === 4) {
-            //             if(rawFile.status === 200 || rawFile.status === 0) {
-            //                 this.$parent.$emit('newData', (rawFile.responseText));
-            //             }
-            //         }
-            //     }
-            //
-            //     rawFile.send(null);
-            // },
             fetchData() {
                 axios.get('https://raw.githubusercontent.com/mdubourg001/datatable_vuejs/master/src/assets/MOCK_DATA.json')
                     .then((response) => {
@@ -124,8 +109,8 @@
             },
 
             filterByCol(col) {
-                if (this.orderBy == col) {
-                    if (this.order == "ASC") {
+                if (this.orderBy === col) {
+                    if (this.order === "ASC") {
                         this.order = "DESC"
                     } else {
                         this.order = "ASC"
@@ -134,25 +119,19 @@
                     this.order = "ASC"
                     this.orderBy = col
                 }
-            },
-
-
-
+            }
         },
         mounted() {
             this.fetchData()
-            // this.readTextFile("file:\\C:\\wamp64\\www\\CESI_VueJS_Introduction\\ProjetWeb_vueJS_dataTable\\src\\assets\\datas.json")
 
             // Modification d'une intervention
             this.$on('update', (updatedIntervention, index)=> {
-                console.log(updatedIntervention)
                 this.dataInterventions[index] = updatedIntervention;
                 console.log(this.dataInterventions)
             })
 
             // Suppression d'une intervention
             this.$on('delete', (idIntervention) => {
-                console.log(idIntervention)
                 this.dataInterventions.splice(idIntervention, 1)
             })
         }

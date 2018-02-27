@@ -8,18 +8,22 @@
                 :newIntervention="newIntervention">
         </InterventionsList>
 
+        <Pagination :nbRows="nbRows"></Pagination>
+
     </div>
 </template>
 
 <script>
     import Table from './components/MyComponent/Table';
     import AddData from './components/MyComponent/AddData';
+    import Pagination from './components/MyComponent/Pagination';
 
     export default {
         name: 'app',
         components: {
             InterventionsList:Table,
-            AddData
+            AddData,
+            Pagination
         },
 
         data(){
@@ -29,8 +33,10 @@
                 updatedIntervention: "",
                 idUpdatedIntervention: "",
 
-                column: '',
                 newid: '',
+
+                rows: '',
+                nbRows:''
 
             }
         },
@@ -39,14 +45,15 @@
             bindEvents() {
                 // Récupérer le nombre d'intervention pour déterminer l'id qu'aura la prochaine intervention créée
                 this.$on('newData', (interventionsList) => {
-                    this.newid = interventionsList.length + 1;
+                    this.rows = interventionsList.length;
+                    this.newid = this.rows++;
+                    this.nbRows = interventionsList.length;
                 });
 
                 // Création d'une intervention
                 this.$on('create', (createdIntervention) => {
                     this.newIntervention = createdIntervention;
                 });
-
             }
         },
 
