@@ -1,6 +1,6 @@
 <template>
     <table class="table table-bordered">
-        <thead >
+        <thead>
             <tr>
                 <th @click="filterByCol('id')">Id</th>
                 <th @click="filterByCol('title')">Title</th>
@@ -8,11 +8,12 @@
                 <th @click="filterByCol('affectedTo')">Affected To</th>
                 <th @click="filterByCol('client')">Client</th>
                 <th @click="filterByCol('state')">State</th>
+                <th>Actions</th>
             </tr>
         </thead>
 
         <tbody>
-                <LineOfTable v-for="intervention,index in filteredInterventions" :intervention="intervention" :index="index"></LineOfTable>
+                <LineOfTable v-for="(intervention, index) in filteredInterventions" :intervention="intervention" :key="index"></LineOfTable>
         </tbody>
         <tfoot>
 
@@ -29,11 +30,9 @@
         props: {
             msg: String,
             newIntervention: '',
-
             updatedIntervention: '',
-            idUpdtedIntervention: ''
+            idUpdatedIntervention: ''
         },
-
         components: {
             LineOfTable
         },
@@ -48,12 +47,9 @@
                 state: '',
 
                 dataInterventions: [],
-                // intervention: {},
 
                 order: "ASC",
-                orderBy: "id",
-
-
+                orderBy: "id"
             }
         },
 
@@ -63,8 +59,9 @@
             },
 
             updatedIntervention(){
-                this.dataInterventions[this.idUpdtedIntervention] = this.updatedIntervention;
-            },
+                this.dataInterventions[this.idUpdatedIntervention] = this.updatedIntervention
+                console.log(this.dataInterventions);
+            }
         },
 
         computed: {
@@ -77,7 +74,7 @@
 
                         if (c < d) {
                             return -1;
-                        }else if (c > d) {
+                        } else if (c > d) {
                             return 1;
                         } else {
                             return 0;
@@ -94,8 +91,7 @@
                 } else {
                     return data.reverse()
                 }
-            },
-
+            }
         },
 
         methods: {
@@ -132,6 +128,11 @@
             this.$on('update', (updatedIntervention, index)=> {
                 this.dataInterventions[index] = updatedIntervention;
                 console.log(this.dataInterventions)
+            })
+
+            // Suppression d'une intervention
+            this.$on('delete', (idIntervention) => {
+                this.dataInterventions.splice(idIntervention, 1)
             })
         }
     }

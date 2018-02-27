@@ -13,8 +13,6 @@
             <input type="submit" value="Ajouter une intervention" />
         </form>
     </div>
-
-
 </template>
 
 <script>
@@ -36,6 +34,7 @@
                 stateInput: '',
 
                 // Pour incrémenter l'id
+                count: 0,
 
                 // newIntervention: {
                 //     id: "",
@@ -48,12 +47,8 @@
             }
         },
 
-
         methods: {
             addIntervention() {
-                // // J'incrémente count, donc l'id
-                // this.count++;
-
                 const newIntervention ={
                     id: this.newid,
                     title: this.titleInput,
@@ -63,18 +58,20 @@
                     state: this.stateInput
                 };
 
+                // Si pas de titre et de client, pas d'ajout
+                if (newIntervention.title != '' && newIntervention.client != '') {
+                    // Transmission intervention a crée + Incrément ID
+                    this.$parent.$emit('create', newIntervention);
+                    // this.$parent.$emit('newData', (Vue.data));
 
-
-                this.$parent.$emit('create', newIntervention);
-
-                // Mettre à zéro nos variables pour la prochaine création d'intervention
-                this.titleInput = "";
-                this.msgInterventionInput = "";
-                this.affectedToInput = "";
-                this.clientInput = "";
-                this.stateInput = ""
-
-            },
+                    // Mettre à zéro nos variables pour la prochaine création d'intervention
+                    this.titleInput = "";
+                    this.msgInterventionInput = "";
+                    this.affectedToInput = "";
+                    this.clientInput = "";
+                    this.stateInput = ""
+                }
+            }
         }
     }
 </script>

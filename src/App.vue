@@ -31,7 +31,7 @@
                 newIntervention: '',
 
                 updatedIntervention: "",
-                idUpdtedIntervention: "",
+                idUpdatedIntervention: "",
 
                 newid: '',
 
@@ -40,7 +40,6 @@
 
             }
         },
-
 
         methods: {
             bindEvents() {
@@ -58,12 +57,9 @@
             }
         },
 
-
-
         mounted() {
             this.bindEvents()
         }
-
     }
 </script>
 

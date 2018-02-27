@@ -8,29 +8,31 @@
 
         <td >
             <input type="text" @keyup.enter='saveEdit()' v-if='editState' v-model='title'>
-            <span v-else>{{title}}</span>
+            <span v-else>{{intervention.title}}</span>
         </td>
 
         <td >
-            <input type="text" @keyup.enter='saveEdit()' v-if='editState' v-model='msgIntervention'>
-            <span v-else>{{msgIntervention}}</span>
+            <input type="text" @keyup.enter='saveEdit()' @keyup.escape="switchEdit()" v-if='editState' v-model='msgIntervention'>
+            <span v-else>{{intervention.msgIntervention}}</span>
         </td>
 
         <td >
-            <input type="text" @keyup.enter='saveEdit()' v-if='editState' v-model='affectedTo'>
-            <span v-else>{{affectedTo}}</span>
+            <input type="text" @keyup.enter='saveEdit()' @keyup.escape="switchEdit()" v-if='editState' v-model='affectedTo'>
+            <span v-else>{{intervention.affectedTo}}</span>
         </td>
 
         <td >
-            <input type="text" @keyup.enter='saveEdit()' v-if='editState' v-model='client'>
-            <span v-else>{{client}}</span>
+            <input type="text" @keyup.enter='saveEdit()' @keyup.escape="switchEdit()" v-if='editState' v-model='client'>
+            <span v-else>{{intervention.client}}</span>
         </td>
 
         <td >
-            <input type="text" @keyup.enter='saveEdit()' v-if='editState' v-model='state'>
-            <span v-else>{{state}}</span>
-        </td>
+            <input type="text" @keyup.enter='saveEdit()' @keyup.escape="switchEdit()" v-if='editState' v-model='state'>
+            <span v-else>{{intervention.state}}</span>
 
+        </td>
+            <button type="button" class="btn btn-info" @click="switchEdit()"><i class="fas fa-edit"></i></button><br/>
+            <button type="button" class="btn btn-danger" @click="deleteIntervention(intervention.id)"><i class="fas fa-trash-alt"></i></button>
         <td>
             <!-- Bouton pour modifier la ligne -->
             <button type="button" class="btn btn-info" @click="switchEdit()">Modifier</button>
@@ -39,18 +41,15 @@
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
                 Voir plus...
             </button>
-
         </td>
-
-
-
-
     </tr>
 </template>
 
 <script>
+
     export default {
         name: "line-of-table",
+
 
         props: {
             intervention: {
@@ -63,13 +62,13 @@
                 index: null,
 
                 nbRows: '',
-
             }
         },
         data() {
             return {
+
                 // Les données initiales
-                id: "",
+                id: this.intervention.id,
                 title: this.intervention.title,
                 msgIntervention: this.intervention.msgIntervention,
                 affectedTo: this.intervention.affectedTo,
@@ -91,15 +90,11 @@
 
         methods:{
             switchEdit(){
-                console.log("helloooo")
-
-                console.log(this.nbRows)
-
-
                 this.editState = !this.editState;
             },
 
-            saveEdit(){
+            saveEdit() {
+
                 const updatedIntervention = {
                     // id: this.intervention.idUpdated,
                     title: this.title,
@@ -122,8 +117,14 @@
 
                 // Remise à true de edit pour revenir à une valeur du tableau non modificable
                 this.editState = !this.editState;
+            },
+            deleteIntervention () {
+                console.log(this.id)
 
-
+                if ( this.id >= 0 ) {
+                    let idToDelete = this.id - 1
+                    this.$parent.$emit('delete', idToDelete)
+                }
             }
         }
     }
