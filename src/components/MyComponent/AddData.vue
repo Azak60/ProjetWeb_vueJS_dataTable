@@ -18,14 +18,9 @@
 </template>
 
 <script>
-    // import LineOfTable from './LineOfTable'
-
     export default {
 
         name: "add-data",
-        // components:{
-        //     LineOfTable
-        // },
 
         props: [
             'newid'

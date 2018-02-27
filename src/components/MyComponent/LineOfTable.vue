@@ -39,16 +39,18 @@
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
                 Voir plus...
             </button>
+
         </td>
+
+
+
 
     </tr>
 </template>
 
 <script>
-
     export default {
         name: "line-of-table",
-
 
         props: {
             intervention: {
@@ -61,11 +63,11 @@
                 index: null,
 
                 nbRows: '',
+
             }
         },
         data() {
             return {
-
                 // Les données initiales
                 id: "",
                 title: this.intervention.title,

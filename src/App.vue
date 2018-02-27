@@ -1,6 +1,6 @@
 <template>
     <div id="app" class="container">
-        <img src="./assets/logo.png">
+        <img src="./assets/societeLogo.jpg">
 
         <AddData :newid="newid"></AddData>
 
