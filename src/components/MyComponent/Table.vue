@@ -8,8 +8,6 @@
                 <th @click="filterByCol('affectedTo')">Affected To</th>
                 <th @click="filterByCol('client')">Client</th>
                 <th @click="filterByCol('state')">State</th>
-
-                <!--<th v-for="column in colName">{{column}}</th>-->
             </tr>
         </thead>
 
@@ -25,16 +23,17 @@
 <script>
     import axios from 'axios';
     import LineOfTable from './LineOfTable.vue';
-    import AddData from './AddData.vue';
 
     export default {
         name: "Table",
         props: {
             msg: String,
             newIntervention: '',
+
             updatedIntervention: '',
             idUpdtedIntervention: ''
         },
+
         components: {
             LineOfTable
         },
@@ -64,9 +63,8 @@
             },
 
             updatedIntervention(){
-                this.dataInterventions[this.idUpdtedIntervention] = this.updatedIntervention
-                console.log(this.dataInterventions);
-            }
+                this.dataInterventions[this.idUpdtedIntervention] = this.updatedIntervention;
+            },
         },
 
         computed: {
@@ -89,18 +87,15 @@
 
                 let filter = compare(this.orderBy); //set filter
 
-                var data = this.dataInterventions.sort(filter);
+                let data = this.dataInterventions.sort(filter);
 
-                if (this.order == "ASC") {
+                if (this.order === "ASC") {
                     return data
                 } else {
                     return data.reverse()
                 }
             },
 
-            // getLastId(){
-            //     return this.intervention[this.intervention.length - 1].id;
-            // }
         },
 
         methods: {
@@ -118,8 +113,8 @@
             },
 
             filterByCol(col) {
-                if (this.orderBy == col) {
-                    if (this.order == "ASC") {
+                if (this.orderBy === col) {
+                    if (this.order === "ASC") {
                         this.order = "DESC"
                     } else {
                         this.order = "ASC"

@@ -12,37 +12,43 @@
         </td>
 
         <td >
-            <input type="text" @keyup.enter='saveEdit()' @keyup.escape="switchEdit()" v-if='editState' v-model='msgIntervention'>
+            <input type="text" @keyup.enter='saveEdit()' v-if='editState' v-model='msgIntervention'>
             <span v-else>{{msgIntervention}}</span>
         </td>
 
         <td >
-            <input type="text" @keyup.enter='saveEdit()' @keyup.escape="switchEdit()" v-if='editState' v-model='affectedTo'>
+            <input type="text" @keyup.enter='saveEdit()' v-if='editState' v-model='affectedTo'>
             <span v-else>{{affectedTo}}</span>
         </td>
 
         <td >
-            <input type="text" @keyup.enter='saveEdit()' @keyup.escape="switchEdit()" v-if='editState' v-model='client'>
+            <input type="text" @keyup.enter='saveEdit()' v-if='editState' v-model='client'>
             <span v-else>{{client}}</span>
         </td>
 
         <td >
-            <input type="text" @keyup.enter='saveEdit()' @keyup.escape="switchEdit()" v-if='editState' v-model='state'>
+            <input type="text" @keyup.enter='saveEdit()' v-if='editState' v-model='state'>
             <span v-else>{{state}}</span>
-
         </td>
-            <button type="button" class="btn btn-info" @click="switchEdit()">Modifier</button>
+
         <td>
+            <!-- Bouton pour modifier la ligne -->
+            <button type="button" class="btn btn-info" @click="switchEdit()">Modifier</button>
 
+            <!-- Button pour activer le modal -->
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                Voir plus...
+            </button>
         </td>
+
     </tr>
 </template>
 
 <script>
 
-
     export default {
         name: "line-of-table",
+
 
         props: {
             intervention: {
@@ -52,11 +58,14 @@
                 affectedTo: String,
                 client: String,
                 state: Boolean,
-                index: null
+                index: null,
+
+                nbRows: '',
             }
         },
         data() {
             return {
+
                 // Les données initiales
                 id: "",
                 title: this.intervention.title,
@@ -80,11 +89,15 @@
 
         methods:{
             switchEdit(){
+                console.log("helloooo")
+
+                console.log(this.nbRows)
+
+
                 this.editState = !this.editState;
             },
 
             saveEdit(){
-
                 const updatedIntervention = {
                     // id: this.intervention.idUpdated,
                     title: this.title,
@@ -93,8 +106,6 @@
                     client: this.client,
                     state: this.state
                 };
-
-                console.log(updatedIntervention);
 
                 this.$parent.$emit('update', updatedIntervention, this.index);
 
@@ -109,6 +120,8 @@
 
                 // Remise à true de edit pour revenir à une valeur du tableau non modificable
                 this.editState = !this.editState;
+
+
             }
         }
     }
