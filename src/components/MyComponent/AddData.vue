@@ -60,7 +60,6 @@
 
                 // Transmission intervention a créer + Incrément ID
                 this.$parent.$emit('create', newIntervention);
-                // this.$parent.$emit('newData', (Vue.data));
 
                 // Mettre à zéro nos variables pour la prochaine création d'intervention
                 this.titleInput = "";

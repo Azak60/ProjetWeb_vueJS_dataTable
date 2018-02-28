@@ -13,7 +13,7 @@
                 :newIntervention="newIntervention">
         </InterventionsList>
 
-        <Pagination :nbRows="nbRows"></Pagination>
+        <Pagination :allInterventions="allInterventions" :nbRows="nbRows"></Pagination>
 
     </div>
 </template>
@@ -42,7 +42,10 @@
                 newid: 0,
 
                 // rows: '',
-                nbRows:''
+                nbRows:'',
+
+                // Récupère toutes les interventions pour l'envoyer au composant Pagination
+                allInterventions:[]
 
             }
         },
@@ -50,34 +53,48 @@
         methods: {
             bindEvents() {
                 // Récupérer le nombre d'intervention pour déterminer l'id qu'aura la prochaine intervention créée
-                this.$on('newData', (interventionsList) => {
 
-                    // Si newid est inférieur à la longueur du tableau initial (Jeu de données obtenu via le fichier JSON)
-                    // Alors newid sera égal à la longueur de ce tableau + 1
-                    if(this.newid < interventionsList.length){
-                        this.newid = interventionsList.length + 1;
+                    this.$on('incrementId', (lastid) => {
+                        this.newid = lastid + 1;
 
-                    // Sinon on récupère la longueur du nouveau tableau (avec les interventions créées / "pushées")
-                    // Alors newid sera égal à cette longueur de tableau
-                        this.$on('incrementId', (updatedListLength) => {
-                            console.log(updatedListLength + ' 1er tour');
-                            this.newid = updatedListLength;
-                        });
-                    } else {
-                        this.$on('incrementId', (updatedListLength) => {
-                            console.log(updatedListLength + ' 2nd tour');
-                            this.newid = updatedListLength + 1;
-                        });
-                    }
+
+
+        // ###############################################################
+                        // this.$on('newData', (interventionsList) => {
+
+                    // // Si newid est inférieur à la longueur du tableau initial (Jeu de données obtenu via le fichier JSON)
+                    // // Alors newid sera égal à la longueur de ce tableau + 1
+                    // if(this.newid < interventionsList.length){
+                    //     this.newid = interventionsList.length + 1;
+                    //
+                    // // Sinon on récupère la longueur du nouveau tableau (avec les interventions créées / "pushées")
+                    // // Alors newid sera égal à cette longueur de tableau
+                    //     this.$on('incrementId', (updatedListLength) => {
+                    //         console.log(updatedListLength + ' 1er tour');
+                    //         this.newid = updatedListLength;
+                    //     });
+                    // } else {
+                    //     this.$on('incrementId', (updatedListLength) => {
+                    //         console.log(updatedListLength + ' 2nd tour');
+                    //         this.newid = updatedListLength + 1;
+                    //     });
+                    // }
 
                     // Utile pour la pagination
-                    this.nbRows = interventionsList.length;
+                    // this.nbRows = interventionsList.length;
+        // ###############################################################
+
                 });
 
                 // Création d'une intervention
                 this.$on('create', (createdIntervention) => {
                     this.newIntervention = createdIntervention;
-                    console.log(this.newid + ' dans le create');
+                });
+
+
+                // Récupère la liste de toutes les interventions
+                this.$on('interventionsList', (interventionsList) => {
+                    this.allInterventions = interventionsList;
                 });
             }
         },

@@ -25,6 +25,8 @@
     import axios from 'axios';
     import LineOfTable from './LineOfTable.vue';
 
+    import fichier from '../../../lib/fichier.json';
+
     export default {
         name: "Table",
         props: {
@@ -39,6 +41,8 @@
 
         data() {
             return {
+                fichier,
+
                 id: 0,
                 title: '',
                 msgIntervention: '',
@@ -54,12 +58,23 @@
         },
 
         watch: {
+            // Récupère de manière dynamique le denier id (le dernier élément) dans le tableau
+            // Ceci car certains éléments peuvent avoir été supprimés, donc récupérer uniquement le nombre total d'éléments n'est pas pertinent
+            // Puis transmission de l'id pour incrémentation
+            dataInterventions: function(){
+                let lastid = this.dataInterventions.length;
+                this.$parent.$emit('incrementId', lastid);
+
+            //  Récupère la liste des interventions pour établir la pagination
+                this.$parent.$emit('interventionsList', this.dataInterventions);
+            },
+
             newIntervention: function(){
                 this.dataInterventions.push(this.newIntervention);
 
                 // Transmission intervention a créer + Incrément ID
-                this.$parent.$emit('incrementId', this.dataInterventions.length);
-                console.log(this.dataInterventions.length + ' après le push');
+                // this.$parent.$emit('incrementId', this.dataInterventions.length);
+                // console.log(this.dataInterventions.length + ' après le push');
             },
 
             updatedIntervention: function(){
@@ -98,17 +113,21 @@
         },
 
         methods: {
+            // Récupérer les données depuis le fichier JSON
             fetchData() {
-                axios.get('https://raw.githubusercontent.com/mdubourg001/datatable_vuejs/master/src/assets/MOCK_DATA.json')
-                    .then((response) => {
-                        console.log(this);
-                        this.dataInterventions = response.data;
+                this.dataInterventions = fichier;
 
-                        this.$parent.$emit('newData', (response.data));
-                    })
-                    .catch(function (error) {
-                        console.log(error)
-                    })
+
+
+                // axios.get('https://raw.githubusercontent.com/mdubourg001/datatable_vuejs/master/src/assets/MOCK_DATA.json')
+                //     .then((response) => {
+                //         this.dataInterventions = response.data;
+                //
+                //         // this.$parent.$emit('newData', (response.data));
+                //     })
+                //     .catch(function (error) {
+                //         console.log(error)
+                //     })
             },
 
             filterByCol(col) {

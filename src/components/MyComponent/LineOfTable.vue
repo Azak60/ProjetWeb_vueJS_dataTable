@@ -33,12 +33,12 @@
 
         <td>
             <!-- Bouton pour modifier la ligne -->
-            <button type="button" class="btn btn-info" @click="switchEdit()"><i class="fas fa-edit"></i></button><br/>
+            <!--<button type="button" class="btn btn-info" @click="switchEdit()"><i class="fas fa-edit"></i></button><br/>-->
 
             <!--<button type="button" class="btn btn-info" @click="switchEdit()">Modifier</button>-->
 
             <!-- Bouton pour supprimer la ligne -->
-            <button type="button" class="btn btn-danger" @click="deleteIntervention(intervention.id)"><i class="fas fa-trash-alt"></i></button>
+            <!--<button type="button" class="btn btn-danger" @click="deleteIntervention(intervention.id)"><i class="fas fa-trash-alt"></i></button>-->
 
 
             <!-- Button pour activer le modal -->
