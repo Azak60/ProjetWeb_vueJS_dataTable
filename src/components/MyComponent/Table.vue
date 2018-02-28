@@ -1,7 +1,7 @@
 <template>
-    <table class="table table-bordered">
+    <table class="table table-bordered table-striped">
         <thead>
-            <tr>
+            <tr class="headTable">
                 <th @click="filterByCol('id')">Id</th>
                 <th @click="filterByCol('title')">Title</th>
                 <th @click="filterByCol('msgIntervention')">Résumé</th>
@@ -54,13 +54,16 @@
         },
 
         watch: {
-            newIntervention(){
-                this.dataInterventions.push(this.newIntervention)
+            newIntervention: function(){
+                this.dataInterventions.push(this.newIntervention);
+
+                // Transmission intervention a créer + Incrément ID
+                this.$parent.$emit('incrementId', this.dataInterventions.length);
+                console.log(this.dataInterventions.length + ' après le push');
             },
 
-            updatedIntervention(){
+            updatedIntervention: function(){
                 this.dataInterventions[this.idUpdatedIntervention] = this.updatedIntervention
-                console.log(this.dataInterventions);
             }
         },
 
@@ -138,6 +141,4 @@
     }
 </script>
 
-<style scoped>
-
-</style>
+<style src="../../stylesheet/stylesheet.css" scoped></style>

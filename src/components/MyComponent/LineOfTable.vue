@@ -6,41 +6,45 @@
            # {{intervention.id}}
         </td>
 
-        <td >
+        <td>
             <input type="text" @keyup.enter='saveEdit()' v-if='editState' v-model='title'>
             <span v-else>{{intervention.title}}</span>
         </td>
 
-        <td >
+        <td>
             <input type="text" @keyup.enter='saveEdit()' @keyup.escape="switchEdit()" v-if='editState' v-model='msgIntervention'>
             <span v-else>{{intervention.msgIntervention}}</span>
         </td>
 
-        <td >
+        <td>
             <input type="text" @keyup.enter='saveEdit()' @keyup.escape="switchEdit()" v-if='editState' v-model='affectedTo'>
             <span v-else>{{intervention.affectedTo}}</span>
         </td>
 
-        <td >
+        <td>
             <input type="text" @keyup.enter='saveEdit()' @keyup.escape="switchEdit()" v-if='editState' v-model='client'>
             <span v-else>{{intervention.client}}</span>
         </td>
 
-        <td >
+        <td>
             <input type="text" @keyup.enter='saveEdit()' @keyup.escape="switchEdit()" v-if='editState' v-model='state'>
             <span v-else>{{intervention.state}}</span>
-
         </td>
-            <button type="button" class="btn btn-info" @click="switchEdit()"><i class="fas fa-edit"></i></button><br/>
-            <button type="button" class="btn btn-danger" @click="deleteIntervention(intervention.id)"><i class="fas fa-trash-alt"></i></button>
+
         <td>
             <!-- Bouton pour modifier la ligne -->
-            <button type="button" class="btn btn-info" @click="switchEdit()">Modifier</button>
+            <button type="button" class="btn btn-info" @click="switchEdit()"><i class="fas fa-edit"></i></button><br/>
+
+            <!--<button type="button" class="btn btn-info" @click="switchEdit()">Modifier</button>-->
+
+            <!-- Bouton pour supprimer la ligne -->
+            <button type="button" class="btn btn-danger" @click="deleteIntervention(intervention.id)"><i class="fas fa-trash-alt"></i></button>
+
 
             <!-- Button pour activer le modal -->
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                Voir plus...
-            </button>
+            <!--<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">-->
+                <!--Voir plus...-->
+            <!--</button>-->
         </td>
     </tr>
 </template>
@@ -49,6 +53,7 @@
 
     export default {
         name: "line-of-table",
+
 
         props: {
             intervention: {
@@ -65,6 +70,7 @@
         },
         data() {
             return {
+
                 // Les données initiales
                 id: this.intervention.id,
                 title: this.intervention.title,
@@ -128,6 +134,4 @@
     }
 </script>
 
-<style scoped>
-
-</style>
+<style src="../../stylesheet/stylesheet.css" scoped></style>
