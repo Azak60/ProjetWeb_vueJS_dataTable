@@ -1,4 +1,8 @@
-.body{
+div #mainContainer {
+    margin: 0 auto;
+}
+
+body{
     text-align: center;
 }
 
@@ -8,7 +12,9 @@
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
     color: #2c3e50;
+    margin: 0 auto;
     margin-top: 20px;
+
 }
 
 /* Logo */
@@ -18,9 +24,15 @@
 }
 
 /* Formulaire d'ajout d'intervention */
-.formAddIntervention {
-    margin: 50px 0 50px 0;
-}
+    .formAddIntervention {
+        text-align: center;
+        margin: 50px auto;
+    }
+
+    .formAddIntervention input {
+        margin: 10px;
+        padding: 5px;
+    }
 
 /* Tableau de données */
     /* Titre de la table */
@@ -31,31 +43,18 @@
     /* Titres des colonnes */
     .headTable {
         background: lightblue;
+        padding: 10px 20px 10px 20px;
     }
 
 
 
 /* Pagination */
-a {
-    color: #999;
-}
-.current {
-    color: red;
-}
-ul {
-    padding: 0;
-    list-style-type: none;
-}
-li {
-    display: inline;
-    margin: 5px 5px;
-}
+    #pagination {
+        display: inline-block;
+    }
 
-a.first::after {
-    content:'...'
-}
-
-a.last::before {
-    content:'...'
-}
+    .numPages {
+        padding: 10px 20px 10px 20px;
+        margin: 5px 5px 50px 5px;
+    }
 

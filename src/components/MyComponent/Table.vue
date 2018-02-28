@@ -1,24 +1,42 @@
 <template>
-    <table class="table table-bordered table-striped">
-        <thead>
-            <tr class="headTable">
-                <th @click="filterByCol('id')">Id</th>
-                <th @click="filterByCol('title')">Title</th>
-                <th @click="filterByCol('msgIntervention')">Résumé</th>
-                <th @click="filterByCol('affectedTo')">Affected To</th>
-                <th @click="filterByCol('client')">Client</th>
-                <th @click="filterByCol('state')">State</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
+    <div>
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr class="headTable">
+                    <th @click="filterByCol('id')">Id</th>
+                    <th @click="filterByCol('title')">Title</th>
+                    <th @click="filterByCol('msgIntervention')">Résumé</th>
+                    <th @click="filterByCol('affectedTo')">Affected To</th>
+                    <th @click="filterByCol('client')">Client</th>
+                    <th @click="filterByCol('state')">State</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
 
-        <tbody>
-                <LineOfTable v-for="(intervention, index) in filteredInterventions" :intervention="intervention" :key="index"></LineOfTable>
-        </tbody>
-        <tfoot>
+            <tbody>
+                    <LineOfTable v-for="(intervention, index) in filteredInterventions" :intervention="intervention" :key="index"></LineOfTable>
+            </tbody>
+            <tfoot>
+            </tfoot>
+        </table>
 
-        </tfoot>
-    </table>
+        <!-- Pagination-->
+        <div
+                id="pagination"
+                v-for="pageNumber in totalPages"
+                v-if="Math.abs(pageNumber - currentPage) < 2 || pageNumber === totalPages || pageNumber === 1"
+        >
+            <button
+                    class="numPages btn btn-info"
+                    :key="pageNumber"
+                    @click="setPage(pageNumber)"
+                    :class="{current: currentPage === pageNumber, last: (pageNumber === totalPages && Math.abs(pageNumber - currentPage) > 3), first:(pageNumber === 1 && Math.abs(pageNumber - currentPage) > 3)}"
+            >
+                {{ pageNumber }}
+            </button>
+        </div>
+
+    </div>
 </template>
 
 <script>
@@ -36,7 +54,7 @@
             idUpdatedIntervention: ''
         },
         components: {
-            LineOfTable
+            LineOfTable,
         },
 
         data() {
@@ -52,8 +70,16 @@
 
                 dataInterventions: [],
 
+                // Pour le tri des colonnes
                 order: "ASC",
-                orderBy: "id"
+                orderBy: "id",
+
+                // Pour la pagination
+                nbRows:0,
+                currentPage: 1,
+                itemsPerPage: 10,
+                indexRow: 0
+
             }
         },
 
@@ -65,10 +91,16 @@
                 let lastid = this.dataInterventions.length;
                 this.$parent.$emit('incrementId', lastid);
 
-            //  Récupère la liste des interventions pour établir la pagination
+                // Pour la pagination
+                this.nbRows = this.dataInterventions.length;
+
+                //  Récupère la liste des interventions pour établir la pagination
                 this.$parent.$emit('interventionsList', this.dataInterventions);
+
+
             },
 
+            // Dès qu'une intervention est créée, on l'ajoute dans le tableau
             newIntervention: function(){
                 this.dataInterventions.push(this.newIntervention);
 
@@ -77,13 +109,19 @@
                 // console.log(this.dataInterventions.length + ' après le push');
             },
 
+            // Dès qu'une intervention est modifiée, le tableau se met à jour
             updatedIntervention: function(){
                 this.dataInterventions[this.idUpdatedIntervention] = this.updatedIntervention
             }
         },
 
         computed: {
+            // Pour la pagination
+            totalPages: function () {
+                return Math.ceil(this.nbRows / this.itemsPerPage)
+            },
 
+            // Filtrer les données
             filteredInterventions() {
                 let compare = function (filter) {
                     return function (a,b) { //closure
@@ -104,15 +142,26 @@
 
                 let data = this.dataInterventions.sort(filter);
 
+                // Pour la pagination : détermine l'index de la première ligne à afficher sur chaque "page" du tableau
+                this.indexRow = this.currentPage * this.itemsPerPage - this.itemsPerPage;
+
                 if (this.order === "ASC") {
-                    return data
+                    // Retourne le tableau des interventions (affichant uniquement le nombre de ligne indiqué dans itemsPerPage)
+                    return data.slice(this.indexRow, this.indexRow + this.itemsPerPage)
                 } else {
-                    return data.reverse()
+                    // Retourne le tableau des interventions filtré. Affichant toujours le nombre de ligne indiqué dans itemsPerPage
+                    return data.reverse().slice(this.indexRow, this.indexRow + this.itemsPerPage)
                 }
             }
         },
 
         methods: {
+            // Pour la pagination
+            setPage: function(pageNumber) {
+                this.currentPage = pageNumber
+            },
+
+
             // Récupérer les données depuis le fichier JSON
             fetchData() {
                 this.dataInterventions = fichier;
@@ -126,18 +175,18 @@
                         this.order = "ASC"
                     }
                 } else {
-                    this.order = "ASC"
+                    this.order = "ASC";
                     this.orderBy = col
                 }
             }
         },
+
         mounted() {
             this.fetchData();
 
             // Modification d'une intervention
             this.$on('update', (updatedIntervention, index)=> {
                 this.dataInterventions[index] = updatedIntervention;
-                console.log(this.dataInterventions)
             });
 
             // Suppression d'une intervention

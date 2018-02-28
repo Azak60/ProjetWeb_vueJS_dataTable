@@ -4,11 +4,16 @@
             <!--<form method="post" action="#" id="formAddData" @submit.prevent="addIntervention()">-->
 
             <h2>Ajouter une intervention</h2>
-            <input required type="text" placeholder="Objet de l'intervention ..." name="txtTitleInput" id="titleInput" v-model="titleInput" />
-            <input type="text" placeholder="Message de l'intervention ..." name="txtMsgInterventionInput" id="msgInterventionInput" v-model="msgInterventionInput" />
-            <input required type="text" placeholder="Affecté à ..." name="txtAffectedToInput" id="AffectedToInput" v-model="affectedToInput" />
+            <input required type="text" placeholder="Objet de l'intervention..." name="txtTitleInput" id="titleInput" v-model="titleInput" />
+            <input type="text" placeholder="Message de l'intervention..." name="txtMsgInterventionInput" id="msgInterventionInput" v-model="msgInterventionInput" />
+            <input required type="text" placeholder="Affecté à..." name="txtAffectedToInput" id="AffectedToInput" v-model="affectedToInput" />
+
+            </br>
+
             <input required type="text" placeholder="Client" name="txtClientInput" id="clientInput" v-model="clientInput" />
             <input type="text" placeholder="Etat" name="txtStateInput" id="stateInput" v-model="stateInput" />
+
+            </br>
 
             <input type="submit" value="Ajouter une intervention" />
         </form>

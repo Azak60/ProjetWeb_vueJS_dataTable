@@ -15,8 +15,6 @@
                 :newIntervention="newIntervention">
         </InterventionsList>
 
-        <Pagination :allInterventions="allInterventions" :nbRows="nbRows"></Pagination>
-
     </div>
 </template>
 
@@ -24,7 +22,6 @@
     import Searchbar from './components/MyComponent/Searchbar';
     import Table from './components/MyComponent/Table';
     import AddData from './components/MyComponent/AddData';
-    import Pagination from './components/MyComponent/Pagination';
 
     export default {
         name: 'app',
@@ -32,7 +29,6 @@
             Searchbar,
             InterventionsList:Table,
             AddData,
-            Pagination
         },
 
         data() {
@@ -45,11 +41,8 @@
                 // Id pour une nouvelle intervention créée
                 newid: 0,
 
-                // rows: '',
-                nbRows:'',
-
                 // Récupère toutes les interventions pour l'envoyer au composant Pagination
-                allInterventions:[]
+                allInterventions:[],
 
             }
         },
@@ -57,7 +50,6 @@
         methods: {
             bindEvents() {
                 // Récupérer le nombre d'intervention pour déterminer l'id qu'aura la prochaine intervention créée
-
                     this.$on('incrementId', (lastid) => {
                         this.newid = lastid + 1;
 
@@ -93,12 +85,6 @@
                 // Création d'une intervention
                 this.$on('create', (createdIntervention) => {
                     this.newIntervention = createdIntervention;
-                });
-
-
-                // Récupère la liste de toutes les interventions
-                this.$on('interventionsList', (interventionsList) => {
-                    this.allInterventions = interventionsList;
                 });
             }
         },
