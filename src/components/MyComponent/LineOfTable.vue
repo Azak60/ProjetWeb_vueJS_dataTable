@@ -33,7 +33,7 @@
 
         <td>
             <!-- Bouton pour modifier la ligne -->
-            <!--<button type="button" class="btn btn-info" @click="switchEdit()"><i class="fas fa-edit"></i></button><br/>-->
+            <button type="button" class="btn btn-info" @click="switchEdit()"><i class="fas fa-edit"></i></button><br/>
 
             <!--<button type="button" class="btn btn-info" @click="switchEdit()">Modifier</button>-->
 
