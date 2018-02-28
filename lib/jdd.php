@@ -8,8 +8,7 @@
         <?php
 
         $tableauNom = ["Durand", "Plot", "Alfred", "Villeneuf", "Boy", "Alain"];
-        $tableauTitre = [];
-        $tableauMsgIntervention = [
+        $tableauTitle = [
             "Définition et mise à jour de la stratégie et objectifs du S.I.",
             "Définition et mise à jour des processus IT de la société.",
             "Définition des besoins en formation pour l'équipe du S.S.I.",
@@ -24,7 +23,12 @@
             "Support et formation des utilisateurs relatifs aux applications métiers.",
             "Droits d'accès informatique - Intervention et assistance."
         ];
-        $tableauPrenom = ["Nicolas", "Cyril", "Sandra", "Anais", "Francis", "Mickaël"];
+        $tableauMsgIntervention = [
+            "Développement",
+            "TMA",
+            "Conception",
+            "Analyse"
+        ];
         $tableauAffectedTo = [0, 1, 2];
         $tableauClient = [0, 1, 2, 3, 4, 5, 6];
         $tableauState = [0, 1, 2];
@@ -32,20 +36,23 @@
         $tableauData = [];
 
         for ($i = 0; $i < 1000 ; $i++) {
-            $titre = rand(1, sizeof($tableauTitre));
-            $msgIntervention = rand(1, sizeof($tableauMsgIntervention));
-            $affectedTo = rand(1, sizeof($tableauNom));
-            $client = rand(1, sizeof($tableauClient));
-            $state = rand(1, sizeof($tableauState));
+            $valueTabTitle = rand(0, sizeof($tableauTitle));
+            $valueTabMsgIntervention = rand(0, sizeof($tableauMsgIntervention));
+
+            $title = $tableauTitle[$valueTabTitle];
+            $msgIntervention = $tableauMsgIntervention[$valueTabMsgIntervention];
+            $affectedTo = rand(0, sizeof($tableauNom));
+            $client = rand(0, sizeof($tableauClient));
+            $state = rand(0, sizeof($tableauState));
 
             $tableauData[] =  [
                     'id' => $i,
-                    'titre' => $titre,
+                    'title' => $title,
                     'msgIntervention' => $msgIntervention,
                     'affectedTo' => $affectedTo,
                     'client' => $client,
                     'state' => $state
-        ];
+            ];
         }
         //// Créer un tableau de données
         //$tableau_pour_json = ['prenom'=>'Alexandre', 'nom'=>'Chevalier'];
