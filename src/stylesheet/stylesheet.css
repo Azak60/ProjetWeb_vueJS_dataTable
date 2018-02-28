@@ -35,6 +35,10 @@ body{
     }
 
 /* Tableau de données */
+    .table {
+        overflow: auto;
+    }
+
     /* Titre de la table */
     .tableTitle {
         margin: 50px 0 30px 0;
