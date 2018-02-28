@@ -35,9 +35,9 @@
 
         $tableauData = [];
 
-        for ($i = 0; $i < 1000 ; $i++) {
-            $valueTabTitle = rand(0, sizeof($tableauTitle));
-            $valueTabMsgIntervention = rand(0, sizeof($tableauMsgIntervention));
+        for ($i = 1; $i <= 1000 ; $i++) {
+            $valueTabTitle = rand(0, sizeof($tableauTitle) - 1);
+            $valueTabMsgIntervention = rand(0, sizeof($tableauMsgIntervention) - 1);
 
             $title = $tableauTitle[$valueTabTitle];
             $msgIntervention = $tableauMsgIntervention[$valueTabMsgIntervention];
