@@ -25,7 +25,7 @@
     import axios from 'axios';
     import LineOfTable from './LineOfTable.vue';
 
-    import fichier from '../../../lib/fichier.json';
+    import fichier from './../../../lib/fichier.json';
 
     export default {
         name: "Table",
@@ -116,18 +116,6 @@
             // Récupérer les données depuis le fichier JSON
             fetchData() {
                 this.dataInterventions = fichier;
-
-
-
-                // axios.get('https://raw.githubusercontent.com/mdubourg001/datatable_vuejs/master/src/assets/MOCK_DATA.json')
-                //     .then((response) => {
-                //         this.dataInterventions = response.data;
-                //
-                //         // this.$parent.$emit('newData', (response.data));
-                //     })
-                //     .catch(function (error) {
-                //         console.log(error)
-                //     })
             },
 
             filterByCol(col) {
@@ -144,18 +132,18 @@
             }
         },
         mounted() {
-            this.fetchData()
+            this.fetchData();
 
             // Modification d'une intervention
             this.$on('update', (updatedIntervention, index)=> {
                 this.dataInterventions[index] = updatedIntervention;
                 console.log(this.dataInterventions)
-            })
+            });
 
             // Suppression d'une intervention
             this.$on('delete', (idIntervention) => {
                 this.dataInterventions.splice(idIntervention, 1)
-            })
+            });
         }
     }
 </script>

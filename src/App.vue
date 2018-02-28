@@ -1,14 +1,16 @@
 <template>
-    <div id="app" class="container">
-        <img src="./assets/societeLogo.jpg" class="logo">
+    <div id="app" class="container-fluid">
+        <!--<img src="./assets/societeLogo.jpg" class="logo">-->
 
         <AddData :newid="newid"></AddData>
+
 
         <!-- Ajout d'une ligne horizontale -->
         <hr>
 
         <h1 class="tableTitle">Tableau des interventions</h1>
 
+        <Searchbar></Searchbar>
         <InterventionsList
                 :newIntervention="newIntervention">
         </InterventionsList>
@@ -19,6 +21,7 @@
 </template>
 
 <script>
+    import Searchbar from './components/MyComponent/Searchbar';
     import Table from './components/MyComponent/Table';
     import AddData from './components/MyComponent/AddData';
     import Pagination from './components/MyComponent/Pagination';
@@ -26,12 +29,13 @@
     export default {
         name: 'app',
         components: {
+            Searchbar,
             InterventionsList:Table,
             AddData,
             Pagination
         },
 
-        data(){
+        data() {
             return {
                 newIntervention: '',
 
