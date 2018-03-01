@@ -3,12 +3,12 @@
         <table class="table table-bordered table-striped">
             <thead>
                 <tr class="headTable">
-                    <th class="align-middle tblCol" @click="filterByCol('id')">Id</th>
-                    <th class="align-middle tblCol" @click="filterByCol('title')">Title</th>
-                    <th class="align-middle tblCol" @click="filterByCol('msgIntervention')">Résumé</th>
-                    <th class="align-middle tblCol tblColAffected" @click="filterByCol('affectedTo')">Affected To</th>
-                    <th class="align-middle tblCol" @click="filterByCol('client')">Client</th>
-                    <th class="align-middle tblCol" @click="filterByCol('state')">State</th>
+                    <th class="align-middle tblCol" @click="filterByCol('id')">Id <i class="fas fa-sort"></i></th>
+                    <th class="align-middle tblCol" @click="filterByCol('title')">Title <i class="fas fa-sort"></i></th>
+                    <th class="align-middle tblCol" @click="filterByCol('msgIntervention')">Résumé <i class="fas fa-sort"></i></th>
+                    <th class="align-middle tblCol tblColAffected" @click="filterByCol('affectedTo')">Affected To <i class="fas fa-sort"></i></th>
+                    <th class="align-middle tblCol" @click="filterByCol('client')">Client <i class="fas fa-sort"></i></th>
+                    <th class="align-middle tblCol" @click="filterByCol('state')">State <i class="fas fa-sort"></i></th>
                     <th class="align-middle">Actions</th>
                 </tr>
             </thead>

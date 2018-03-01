@@ -43,12 +43,12 @@ body{
     }
 
     .tblCol {
-        min-width: 75px;
+        min-width: 90px;
     }
 
     /* Pour que la colonne soit sur une seule ligne */
     .tblColAffected {
-        min-width: 103px;
+        min-width: 115px;
     }
 
     /* Titre de la table */
