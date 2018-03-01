@@ -13,11 +13,18 @@ body{
 
 }
 
-/* Logo */
-.logo {
-    border: 1px solid lightgrey;
-    padding: 10px 12px 19px 15px;
-}
+/* Logo et icones */
+    .logo {
+        border: 1px solid lightgrey;
+        padding: 10px 12px 19px 15px;
+    }
+
+    .buttonLine {
+        width: 32px;
+        height: 32px;
+        border: 2px;
+        padding: 2px;
+    }
 
 /* Formulaire d'ajout d'intervention */
     .formAddIntervention {
@@ -58,7 +65,6 @@ body{
     /* Titres des colonnes */
     .headTable {
         background: lightblue;
-        padding: 10px 20px 10px 20px;
     }
 
 

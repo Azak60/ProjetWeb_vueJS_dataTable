@@ -4,10 +4,13 @@
 
         <AddData :newid="newid"></AddData>
 
+
         <!-- Ajout d'une ligne horizontale -->
         <hr>
 
         <h1 class="tableTitle">Tableau des interventions</h1>
+
+        <!--<Searchbar></Searchbar>-->
 
         <InterventionsList
                 :newIntervention="newIntervention">
@@ -17,17 +20,19 @@
 </template>
 
 <script>
+    import Searchbar from './components/MyComponent/Searchbar';
     import Table from './components/MyComponent/Table';
     import AddData from './components/MyComponent/AddData';
 
     export default {
         name: 'app',
         components: {
+            Searchbar,
             InterventionsList:Table,
             AddData,
         },
 
-        data(){
+        data() {
             return {
                 newIntervention: '',
 

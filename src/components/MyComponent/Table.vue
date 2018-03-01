@@ -3,13 +3,13 @@
         <table class="table table-bordered table-striped">
             <thead>
                 <tr class="headTable">
-                    <th class="tblCol" @click="filterByCol('id')">Id</th>
-                    <th class="tblCol" @click="filterByCol('title')">Title</th>
-                    <th class="tblCol" @click="filterByCol('msgIntervention')">Résumé</th>
-                    <th class="tblColAffected" @click="filterByCol('affectedTo')">Affected To</th>
-                    <th class="tblCol" @click="filterByCol('client')">Client</th>
-                    <th class="tblCol" @click="filterByCol('state')">State</th>
-                    <th class="tblCol">Actions</th>
+                    <th class="align-middle" @click="filterByCol('id')">Id</th>
+                    <th class="align-middle" @click="filterByCol('title')">Title</th>
+                    <th class="align-middle" @click="filterByCol('msgIntervention')">Résumé</th>
+                    <th class="align-middle" @click="filterByCol('affectedTo')">Affected To</th>
+                    <th class="align-middle" @click="filterByCol('client')">Client</th>
+                    <th class="align-middle" @click="filterByCol('state')">State</th>
+                    <th class="align-middle">Actions</th>
                 </tr>
             </thead>
 
@@ -34,8 +34,6 @@
                     @click="setPage(pageNumber)"
                     :class="pageNumber"
             >
-                    <!--:class="{current: currentPage === pageNumber, last: (pageNumber === totalPages && Math.abs(pageNumber - currentPage) > 3), first:(pageNumber === 1 && Math.abs(pageNumber - currentPage) > 3)}"-->
-
                 {{ pageNumber }}
             </button>
         </div>
@@ -47,7 +45,7 @@
     import axios from 'axios';
     import LineOfTable from './LineOfTable.vue';
 
-    import fichier from '../../../lib/fichier.json';
+    import fichier from './../../../lib/fichier.json';
 
     export default {
         name: "Table",
@@ -162,18 +160,6 @@
             // Récupérer les données depuis le fichier JSON
             fetchData() {
                 this.dataInterventions = fichier;
-
-
-
-                // axios.get('https://raw.githubusercontent.com/mdubourg001/datatable_vuejs/master/src/assets/MOCK_DATA.json')
-                //     .then((response) => {
-                //         this.dataInterventions = response.data;
-                //
-                //         // this.$parent.$emit('newData', (response.data));
-                //     })
-                //     .catch(function (error) {
-                //         console.log(error)
-                //     })
             },
 
             filterByCol(col) {
