@@ -31,9 +31,6 @@
             return {
                 newIntervention: '',
 
-                updatedIntervention: "",
-                idUpdatedIntervention: "",
-
                 // Id pour une nouvelle intervention créée
                 newid: 0,
 
@@ -82,6 +79,7 @@
                 this.$on('create', (createdIntervention) => {
                     this.newIntervention = createdIntervention;
                 });
+
             }
         },
 

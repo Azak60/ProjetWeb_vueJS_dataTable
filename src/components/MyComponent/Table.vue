@@ -3,21 +3,23 @@
         <table class="table table-bordered table-striped">
             <thead>
                 <tr class="headTable">
-                    <th @click="filterByCol('id')">Id</th>
-                    <th @click="filterByCol('title')">Title</th>
-                    <th @click="filterByCol('msgIntervention')">Résumé</th>
-                    <th @click="filterByCol('affectedTo')">Affected To</th>
-                    <th @click="filterByCol('client')">Client</th>
-                    <th @click="filterByCol('state')">State</th>
-                    <th>Actions</th>
+                    <th class="tblCol" @click="filterByCol('id')">Id</th>
+                    <th class="tblCol" @click="filterByCol('title')">Title</th>
+                    <th class="tblCol" @click="filterByCol('msgIntervention')">Résumé</th>
+                    <th class="tblColAffected" @click="filterByCol('affectedTo')">Affected To</th>
+                    <th class="tblCol" @click="filterByCol('client')">Client</th>
+                    <th class="tblCol" @click="filterByCol('state')">State</th>
+                    <th class="tblCol">Actions</th>
                 </tr>
             </thead>
 
             <tbody>
-                    <LineOfTable v-for="(intervention, index) in filteredInterventions" :intervention="intervention" :key="index"></LineOfTable>
+                    <LineOfTable v-for="(intervention, index) in filteredInterventions"
+                                 :intervention="intervention"
+                                 :key="index">
+                    </LineOfTable>
             </tbody>
-            <tfoot>
-            </tfoot>
+            <tfoot></tfoot>
         </table>
 
         <!-- Pagination-->
@@ -30,8 +32,10 @@
                     class="numPages btn btn-info"
                     :key="pageNumber"
                     @click="setPage(pageNumber)"
-                    :class="{current: currentPage === pageNumber, last: (pageNumber === totalPages && Math.abs(pageNumber - currentPage) > 3), first:(pageNumber === 1 && Math.abs(pageNumber - currentPage) > 3)}"
+                    :class="pageNumber"
             >
+                    <!--:class="{current: currentPage === pageNumber, last: (pageNumber === totalPages && Math.abs(pageNumber - currentPage) > 3), first:(pageNumber === 1 && Math.abs(pageNumber - currentPage) > 3)}"-->
+
                 {{ pageNumber }}
             </button>
         </div>
@@ -50,9 +54,8 @@
         props: {
             msg: String,
             newIntervention: '',
-            updatedIntervention: '',
-            idUpdatedIntervention: ''
         },
+
         components: {
             LineOfTable,
         },
@@ -78,8 +81,11 @@
                 nbRows:0,
                 currentPage: 1,
                 itemsPerPage: 10,
-                indexRow: 0
+                indexRow: 0,
 
+                // Pour la modification d'intervention
+                updatedIntervention: "",
+                idUpdatedIntervention: "",
             }
         },
 
@@ -93,20 +99,11 @@
 
                 // Pour la pagination
                 this.nbRows = this.dataInterventions.length;
-
-                //  Récupère la liste des interventions pour établir la pagination
-                this.$parent.$emit('interventionsList', this.dataInterventions);
-
-
             },
 
             // Dès qu'une intervention est créée, on l'ajoute dans le tableau
             newIntervention: function(){
                 this.dataInterventions.push(this.newIntervention);
-
-                // Transmission intervention a créer + Incrément ID
-                // this.$parent.$emit('incrementId', this.dataInterventions.length);
-                // console.log(this.dataInterventions.length + ' après le push');
             },
 
             // Dès qu'une intervention est modifiée, le tableau se met à jour
@@ -194,17 +191,30 @@
         },
 
         mounted() {
-            this.fetchData()
-
-            // Modification d'une intervention
-            this.$on('update', (updatedIntervention, index)=> {
-                this.dataInterventions[index] = updatedIntervention;
-            })
+            this.fetchData();
 
             // Suppression d'une intervention
             this.$on('delete', (idIntervention) => {
                 this.dataInterventions.splice(idIntervention, 1)
+            });
+
+
+            // Modification d'une intervention
+            this.$on('update', (updatedIntervention, index)=> {
+                // this.dataInterventions[index] = updatedIntervention;
+                this.updatedIntervention = updatedIntervention;
+                this.idUpdatedIntervention = index;
+
+
+                // this.updatedIntervention = updatedIntervention;
+                // console.log( 'parametre ' + updatedIntervention)
+                // console.log(this.updatedIntervention + ' définition')
+                // this.idUpdatedIntervention = index;
+                // console.log(index + ' parametre INDEX')
+                // console.log(this.idUpdatedIntervention + ' définition INDEX')
+
             })
+
         }
     }
 </script>

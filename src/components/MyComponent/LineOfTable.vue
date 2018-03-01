@@ -12,22 +12,22 @@
         </td>
 
         <td>
-            <input type="text" @keyup.enter='saveEdit()' @keyup.escape="switchEdit()" v-if='editState' v-model='msgIntervention'>
+            <input type="text" @keyup.enter='saveEdit()' v-if='editState' v-model='msgIntervention'>
             <span v-else>{{intervention.msgIntervention}}</span>
         </td>
 
         <td>
-            <input type="text" @keyup.enter='saveEdit()' @keyup.escape="switchEdit()" v-if='editState' v-model='affectedTo'>
+            <input type="text" @keyup.enter='saveEdit()' v-if='editState' v-model='affectedTo'>
             <span v-else>{{intervention.affectedTo}}</span>
         </td>
 
         <td>
-            <input type="text" @keyup.enter='saveEdit()' @keyup.escape="switchEdit()" v-if='editState' v-model='client'>
+            <input type="text" @keyup.enter='saveEdit()' v-if='editState' v-model='client'>
             <span v-else>{{intervention.client}}</span>
         </td>
 
         <td>
-            <input type="text" @keyup.enter='saveEdit()' @keyup.escape="switchEdit()" v-if='editState' v-model='state'>
+            <input type="text" @keyup.enter='saveEdit()' v-if='editState' v-model='state'>
             <span v-else>{{intervention.state}}</span>
         </td>
 
@@ -35,16 +35,8 @@
             <!-- Bouton pour modifier la ligne -->
             <button type="button" class="btn btn-info" @click="switchEdit()"><i class="fas fa-edit"></i></button><br/>
 
-            <!--<button type="button" class="btn btn-info" @click="switchEdit()">Modifier</button>-->
-
             <!-- Bouton pour supprimer la ligne -->
-            <!--<button type="button" class="btn btn-danger" @click="deleteIntervention(intervention.id)"><i class="fas fa-trash-alt"></i></button>-->
-
-
-            <!-- Button pour activer le modal -->
-            <!--<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">-->
-                <!--Voir plus...-->
-            <!--</button>-->
+            <button type="button" class="btn btn-danger" @click="deleteIntervention(intervention.id)"><i class="fas fa-trash-alt"></i></button>
         </td>
     </tr>
 </template>
@@ -54,7 +46,6 @@
     export default {
         name: "line-of-table",
 
-
         props: {
             intervention: {
                 id: Number,
@@ -62,15 +53,12 @@
                 msgIntervention: String,
                 affectedTo: String,
                 client: String,
-                state: Boolean,
-                index: null,
-
-                nbRows: '',
+                state: String,
             }
         },
+
         data() {
             return {
-
                 // Les données initiales
                 id: this.intervention.id,
                 title: this.intervention.title,
@@ -98,9 +86,8 @@
             },
 
             saveEdit() {
-
                 const updatedIntervention = {
-                    // id: this.intervention.idUpdated,
+                    id: this.intervention.id,
                     title: this.title,
                     msgIntervention: this.msgIntervention,
                     affectedTo: this.affectedTo,
@@ -108,25 +95,25 @@
                     state: this.state
                 };
 
-                this.$parent.$emit('update', updatedIntervention, this.index);
+                let idToChange = this.intervention.id - 1;
+
+                this.$parent.$emit('update', updatedIntervention, idToChange);
 
                 // Mettre à zéro nos variables pour la prochaine création d'intervention
-                // this.idUpdated = '';
-                // this.titleUpdated = '';
-                // this.msgInterventionUpdated = '';
-                // this.affectedToUpdated = '';
-                // this.clientUpdated = '';
-                // this.stateUpdated = '';
-
+                // this.id = '';
+                // this.title = '';
+                // this.msgIntervention = '';
+                // this.affectedTo = '';
+                // this.client = '';
+                // this.state = '';
 
                 // Remise à true de edit pour revenir à une valeur du tableau non modificable
                 this.editState = !this.editState;
             },
-            deleteIntervention () {
-                console.log(this.id)
 
+            deleteIntervention () {
                 if ( this.id >= 0 ) {
-                    let idToDelete = this.id - 1
+                    let idToDelete = this.id - 1;
                     this.$parent.$emit('delete', idToDelete)
                 }
             }
