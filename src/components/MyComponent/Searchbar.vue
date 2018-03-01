@@ -1,6 +1,6 @@
 <template>
     <div>
-        Effectuer une recherche : <input type="text" name="search" :v-model="filter" />
+        Effectuer une recherche : <input type="text"  name="search" class="form-control" :v-model="searchFilter" />
     </div>
 </template>
 
@@ -8,13 +8,19 @@
     export default {
         name: "searchbar",
 
+        props: {
+            searchFilter: String
+        },
         data() {
             return {
-                filter: ''
+                searchFilter: ''
             }
         },
-        watch() {
-
+        watch: {
+            searchFilter: function() {
+                searchFilter = this.searchFilter
+                this.$parent.$emit('filtreSearchBar', searchFilter)
+            }
         }
     }
 </script>

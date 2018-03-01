@@ -1,6 +1,6 @@
 <template>
-    <div id="app" class="container-fluid">
-        <!--<img src="./assets/societeLogo.jpg" class="logo">-->
+    <div id="app" class="container">
+        <img src="./assets/societeLogo.jpg" class="logo">
 
         <AddData :newid="newid"></AddData>
 
@@ -10,7 +10,8 @@
 
         <h1 class="tableTitle">Tableau des interventions</h1>
 
-        <Searchbar></Searchbar>
+        <!--<Searchbar></Searchbar>-->
+
         <InterventionsList
                 :newIntervention="newIntervention">
         </InterventionsList>

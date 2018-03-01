@@ -1,21 +1,20 @@
 <template>
-    <div class="row formAddIntervention">
+    <div class="row justify-content-center formAddIntervention">
         <form method="post" action="#" id="formAddData" @submit.prevent="addIntervention()">
-            <!--<form method="post" action="#" id="formAddData" @submit.prevent="addIntervention()">-->
 
             <h2>Ajouter une intervention</h2>
             <input required type="text" placeholder="Objet de l'intervention..." name="txtTitleInput" id="titleInput" v-model="titleInput" />
             <input type="text" placeholder="Message de l'intervention..." name="txtMsgInterventionInput" id="msgInterventionInput" v-model="msgInterventionInput" />
             <input required type="text" placeholder="Affecté à..." name="txtAffectedToInput" id="AffectedToInput" v-model="affectedToInput" />
 
-            </br>
+            <br/>
 
             <input required type="text" placeholder="Client" name="txtClientInput" id="clientInput" v-model="clientInput" />
             <input type="text" placeholder="Etat" name="txtStateInput" id="stateInput" v-model="stateInput" />
 
-            </br>
+            <br/>
 
-            <input type="submit" value="Ajouter une intervention" />
+            <input type="submit" class="form-control" value="Ajouter une intervention" />
         </form>
     </div>
 </template>
@@ -39,21 +38,14 @@
                 stateInput: '',
 
                 // Pour incrémenter l'id
-                count: 0,
-
-                // newIntervention: {
-                //     id: "",
-                //     title: "",
-                //     msgIntervention: "",
-                //     affectedTo: "",
-                //     client: "",
-                //     state:""
-                // }
+                count: 0
             }
         },
 
         methods: {
             addIntervention() {
+
+                // Affectation des valeurs input
                 const newIntervention ={
                     id: this.newid,
                     title: this.titleInput,

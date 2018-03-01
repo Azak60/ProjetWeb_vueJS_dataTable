@@ -3,13 +3,13 @@
         <table class="table table-bordered table-striped">
             <thead>
                 <tr class="headTable">
-                    <th @click="filterByCol('id')">Id</th>
-                    <th @click="filterByCol('title')">Title</th>
-                    <th @click="filterByCol('msgIntervention')">Résumé</th>
-                    <th @click="filterByCol('affectedTo')">Affected To</th>
-                    <th @click="filterByCol('client')">Client</th>
-                    <th @click="filterByCol('state')">State</th>
-                    <th>Actions</th>
+                    <th class="align-middle" @click="filterByCol('id')">Id</th>
+                    <th class="align-middle" @click="filterByCol('title')">Title</th>
+                    <th class="align-middle" @click="filterByCol('msgIntervention')">Résumé</th>
+                    <th class="align-middle" @click="filterByCol('affectedTo')">Affected To</th>
+                    <th class="align-middle" @click="filterByCol('client')">Client</th>
+                    <th class="align-middle" @click="filterByCol('state')">State</th>
+                    <th class="align-middle">Actions</th>
                 </tr>
             </thead>
 
