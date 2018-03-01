@@ -24,7 +24,7 @@
         <div
                 id="pagination"
                 v-for="pageNumber in totalPages"
-                v-if="Math.abs(pageNumber - currentPage) < 2 || pageNumber === totalPages || pageNumber === 1"
+                v-if="Math.abs(pageNumber - currentPage) < 3 || pageNumber === totalPages || pageNumber === 1"
         >
             <button
                     class="numPages btn btn-info"
