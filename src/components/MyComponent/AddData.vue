@@ -14,7 +14,7 @@
 
             <br/>
 
-            <input type="submit" class="form-control" value="Ajouter une intervention" />
+            <input type="submit" class="form-control btn-info" value="Ajouter une intervention" />
         </form>
     </div>
 </template>

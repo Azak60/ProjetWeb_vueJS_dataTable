@@ -8,7 +8,6 @@ body{
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
     color: #2c3e50;
-    margin: 0 auto;
     margin-top: 20px;
 
 }
@@ -41,15 +40,10 @@ body{
     .table {
         overflow: auto;
         font-size: 14px;
-        vertical-align: center;
-    }
-
-    table td {
-        vertical-align: middle;
     }
 
     .tblCol {
-        min-width: 80px;
+        min-width: 75px;
     }
 
     /* Pour que la colonne soit sur une seule ligne */
